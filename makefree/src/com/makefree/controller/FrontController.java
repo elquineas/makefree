@@ -11,7 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.makefree.action.Action;
 import com.makefree.action.ActionForward;
+import com.makefree.action.ConstractAction;
+import com.makefree.action.IdCheckAction;
 import com.makefree.action.IndexAction;
+import com.makefree.action.MemberAction;
 
 @WebServlet("/FrontController")
 public class FrontController extends HttpServlet {
@@ -36,8 +39,18 @@ public class FrontController extends HttpServlet {
 		if(command.contentEquals("/index.makefree")) {
 			action = new IndexAction();
 			forward = action.excute(request, response);
-			
+		} else if(command.contentEquals("/constract.makefree")) {
+			action = new ConstractAction();
+			forward = action.excute(request, response);
+		} else if(command.contentEquals("/member.makefree")) {
+			action = new MemberAction();
+			forward = action.excute(request, response);
+		} else if(command.contentEquals("/idCheck.makefree")) {
+			action = new IdCheckAction();
+			forward = action.excute(request, response);
 		}
+		
+		
 		
 		
 		//-------- 공통 분기 작업 ----------------

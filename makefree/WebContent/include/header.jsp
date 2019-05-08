@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="${path}/css/common.css?v=1">
 <link rel="stylesheet" href="${path}/css/header.css?v=1">
+<link rel="stylesheet" href="${path}/css/index.css?v=1">
 <title>Insert title here</title>
 </head>
 <body>
@@ -42,7 +43,7 @@
 			<div class="member_box">
 				<a href="#">아이디 찾기</a>&nbsp;<span class="si">|</span>&nbsp;
 				<a href="#">비밀번호 찾기</a>&nbsp;<span class="si">|</span>&nbsp;
-				<a href="membership.html">회원가입</a>
+				<a href="${path}/constract.makefree">회원가입</a>
 			</div>
 				
 		</div>	
@@ -74,7 +75,7 @@
 				</span>
 			</span>
 			<span class="login_icon"> 
-				<a href="constract1.html">회원가입</a>
+				<a href="${path}/constract.makefree">회원가입</a>
 			</span>
 			<span class="login_icon"> 
 				<a href="#">고객센터</a>
