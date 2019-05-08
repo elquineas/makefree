@@ -1,0 +1,73 @@
+-- makefree 프로젝트 dummy 데이터 생성 --
+
+-- 상품 sequence --
+DROP SEQUENCE seq_product;
+CREATE SEQUENCE seq_product
+START WITH 1
+INCREMENT BY 1
+NOCYCLE;
+
+-- 상품테이블 --
+DROP TABLE tbl_product;
+CREATE TABLE tbl_product(
+    p_code VARCHAR2(5) PRIMARY KEY,
+    p_name VARCHAR2(100) NOT NULL,
+    p_type VARCHAR2(50) NOT NULL,
+    p_price NUMBER NOT NULL,
+    p_img VARCHAR2(100),
+    p_cnt NUMBER DEFAULT 0,
+    p_good NUMBER DEFAULT 0,
+    p_indate DATE DEFAULT SYSDATE
+);
+
+INSERT INTO tbl_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
+VALUES(seq_product.NEXTVAL, '치킨', '닭고기', '0', '치킨.jpg','1','100');
+INSERT INTO tbl_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
+VALUES(seq_product.NEXTVAL, '닭고기볶음', '닭고기', '0', '닭고기2.jpg','1','50');
+INSERT INTO tbl_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
+VALUES(seq_product.NEXTVAL, '불닭', '닭고기', '0', '닭고기3.jpg','1','200');
+INSERT INTO tbl_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
+VALUES(seq_product.NEXTVAL, '닭갈비', '닭고기', '0', '닭고기4.jpg','1','300');
+
+INSERT INTO tbl_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
+VALUES(seq_product.NEXTVAL, '스테이크', '돼지고기', '0', '돼지1.jpg','1','1000');
+INSERT INTO tbl_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
+VALUES(seq_product.NEXTVAL, '돼지고기 볶음', '돼지고기', '0', '돼지2.jpg','1','200');
+INSERT INTO tbl_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
+VALUES(seq_product.NEXTVAL, '수육', '돼지고기', '0', '돼지3.jpg','1','30');
+INSERT INTO tbl_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
+VALUES(seq_product.NEXTVAL, '동파육', '돼지고기', '0', '돼지4.jpg','1','520');
+
+INSERT INTO tbl_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
+VALUES(seq_product.NEXTVAL, '불고기', '소고기', '0', '소고기1.jpg','1','1000');
+INSERT INTO tbl_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
+VALUES(seq_product.NEXTVAL, '소고기 감자조림', '소고기', '0', '소고기2.jpg','1','300');
+INSERT INTO tbl_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
+VALUES(seq_product.NEXTVAL, '소고기 동파육', '소고기', '0', '소고기3.jpg','1','330');
+INSERT INTO tbl_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
+VALUES(seq_product.NEXTVAL, '규카츠', '소고기', '0', '소고기4.jpg','1','500');
+
+
+SELECT * FROM tbl_product
+WHERE rownum <=5
+ORDER BY p_good DESC;
+-- best 상품 4건 추출 --
+SELECT * 
+FROM(SELECT * FROM tbl_product
+     ORDER BY p_good DESC)
+WHERE rownum <= 4;
+
+
+
+SELECT * FROM tbl_product
+WHERE rownum <=4
+ORDER BY indate DESC;
+-- new 상품 4건 추출 --
+SELECT * 
+FROM(SELECT * FROM tbl_product
+     ORDER BY p_indate DESC)
+WHERE rownum <= 4;
+
+
+
+
