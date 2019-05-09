@@ -368,6 +368,7 @@
 				}else{
 					$('#email_url').val(selmail);
 					$('#email_url').prop('readonly', true);
+					$('#email_url').keyup();
 				}
 			});
 
@@ -607,7 +608,7 @@
 			});
 			
 			$('#email_url').keyup(function(event) {
-				var email = $.trim($(this).val());
+				var email = $.trim($('#input_mail').val());
 				var url = $.trim($('#email_url').val());
 				
 				if(url == "" || url.length == 0){
