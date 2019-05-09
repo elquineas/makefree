@@ -132,7 +132,6 @@
 			} else {
 				$('.err_code').first().css('display','none');
 			}
-
 			if (valPw == '') {
 				$('.err_code').last().css('display','block');
 				$('#inputpw').focus();
