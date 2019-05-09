@@ -69,5 +69,32 @@ FROM(SELECT * FROM tbl_product
 WHERE rownum <= 4;
 
 
+-- 회원 시퀀스 생성 --
+DROP SEQUENCE seq_member;
+CREATE SEQUENCE seq_member
+START WITH 1
+INCREMENT BY 1
+NOCYCLE;
 
+
+DROP TABLE tbl_member;
+CREATE TABLE tbl_member(
+    id VARCHAR2(30) PRIMARY KEY,
+    pw VARCHAR2(30) NOT NULL, 
+    name VARCHAR2(30) NOT NULL,
+    phone VARCHAR2(30) NOT NULL,
+    email VARCHAR2(50) NOT NULL,
+    addr1 VARCHAR2(30) NOT NULL,
+    addr2 VARCHAR2(30) NOT NULL,
+    regdate DATE DEFAULT SYSDATE
+);
+
+INSERT INTO tbl_member(id, pw, name, phone, email, addr1, addr2)
+VALUES('elquineas','q1w2e3r4', '김도연','01028160000','elquineas@naver.com','광주광역시 계림동','sm빌라 101');
+INSERT INTO tbl_member(id, pw, name, phone, email, addr1, addr2)
+VALUES('kimdooly','q1w2e3r4', '김둘리','01028161111','elquineas@naver.com','광주광역시 계림동','sm빌라 102');
+INSERT INTO tbl_member(id, pw, name, phone, email, addr1, addr2)
+VALUES('kimdooly1','q1w2e3r4', '둘리킴','01028162222','elquineas@naver.com','광주광역시 계림동','sm빌라 103');
+commit
+SELECT * FROM tbl_member;
 
