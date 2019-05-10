@@ -147,7 +147,11 @@
 		height:30px;
 		margin-top: 10px;
 	}
+	.addr2{
+		width:500px;
+	}
 	#addr_btn{
+		width: 247px;
 		height: 30px;
 	}
 	
@@ -218,111 +222,132 @@
 	.check_i >i{
 		line-height: 37px!important;
 	}
+	
+	.btn_add{
+		width: 100%;
+		height: 100%;
+		outline: none;
+		text-align: center;
+		font-size: 30px;
+		line-height: 45px;
+		border:none;
+		background-color: #FFB400;
+		color: white;
+		font-weight: 600;
+		cursor: pointer;
+	}
 </style>
 </head>
 <body>
 	<div class="body_wrap">
-		<div class="body_box">
-			<div class="btn_back">
-				<i class="fas fa-arrow-left" id="back_btn"></i>
-			</div>
-			<div class="body_header">
-				<img src="${path}/images/logo2-12.png">
-			</div>
-			<div class="info_box">
-				아이디
-				<span class="err_msg">* 필수입력 정보입니다.</span>
-				<div id="insert_id" class="insert_div">
-					<input type="text" id="input_id" class="input_class" maxlength="15">
-					<div class="check_i"><i class="fas fa-check-circle"></i></div>
+		<form action="memberPlay.makefree" method="POST" name="frm_mem" id="frm_mem">
+			<div class="body_box">
+				<div class="btn_back">
+					<i class="fas fa-arrow-left" id="back_btn"></i>
 				</div>
-			</div>
-			<div class="info_box">
-				패스워드
-				<span class="err_msg">* 필수입력 정보입니다.</span>
-				<div id="insert_pw" class="insert_div">
-					<input type="password" id="input_pw" class="input_class" maxlength="12">
-					<div class="check_i"><i class="fas fa-check-circle"></i></div>
+				<div class="body_header">
+					<img src="${path}/images/logo2-12.png">
 				</div>
-			</div>
-			<div class="info_box">
-				패스워드 확인
-				<span class="err_msg">* 필수입력 정보입니다.</span>
-				<div id="insert_repw" class="insert_div">
-					<input type="password" id="input_repw" class="input_class" maxlength="12">
-					<div class="check_i"><i class="fas fa-check-circle"></i></div>
-				</div>
-			</div>
-			<div class="info_box">
-				이름
-				<span class="err_msg">* 필수입력 정보입니다.</span>
-				<div id="insert_name" class="insert_div">
-					<input type="text" id="input_name" class="input_class" maxlength="5">
-					<div class="check_i"><i class="fas fa-check-circle"></i></div>
-				</div>
-			</div>
-			<div class="info_box ">
-				전화번호
-				<span class="err_msg">* 필수입력 정보입니다.</span>
-				<div class="phone_flex">
-					<div class="insert_phone ">
-						<input type="text" id="insert_phone1" maxlength="3" class="input_class input_phone">
-					</div>
-					<div class="underbar">
-						-
-					</div>
-					<div class="insert_phone ">
-						<input type="text" id="insert_phone2" maxlength="4" class="input_class input_phone">
-					</div>
-					<div class="underbar">
-						-
-					</div>
-					<div class="insert_phone ">
-						<input type="text" id="insert_phone3" maxlength="4" class="input_class input_phone">
+				<div class="info_box">
+					아이디
+					<span class="err_msg">* 필수입력 정보입니다.</span>
+					<div id="insert_id" class="insert_div">
+						<input type="text" id="input_id" name="input_id" class="input_class" maxlength="15">
 						<div class="check_i"><i class="fas fa-check-circle"></i></div>
 					</div>
-
 				</div>
-			</div>
-			<div class="info_box" >
-				이메일
-				<span class="err_msg">* 필수입력 정보입니다.</span>
-				<div id="mail_wrap" class="insert_div">
-					<div id="email_box">
-						<input type="text" id="input_mail" class="input_class">
+				<div class="info_box">
+					패스워드
+					<span class="err_msg">* 필수입력 정보입니다.</span>
+					<div id="insert_pw" class="insert_div">
+						<input type="password" id="input_pw" name="input_pw" class="input_class" maxlength="12">
+						<div class="check_i"><i class="fas fa-check-circle"></i></div>
 					</div>
-					<div class="at">@</div>
-					<input type="text" id="email_url" >
-					<div class="space_box"> </div>
-					<select id="selmail">
-						<option value="directVal">직접입력</option>
-						<option value="naver.com">naver.com(네이버)</option>
-						<option value="daum.net">daum.net(다음카카오)</option>
-						<option value="gmail.com">gmail.com(구글)</option>
-						<option value="nate.com">nate.com(네이트)</option>
-					</select>
+				</div>
+				<div class="info_box">
+					패스워드 확인
+					<span class="err_msg">* 필수입력 정보입니다.</span>
+					<div id="insert_repw" class="insert_div">
+						<input type="password" id="input_repw" class="input_class" maxlength="12">
+						<div class="check_i"><i class="fas fa-check-circle"></i></div>
+					</div>
+				</div>
+				<div class="info_box">
+					이름
+					<span class="err_msg">* 필수입력 정보입니다.</span>
+					<div id="insert_name" class="insert_div">
+						<input type="text" id="input_name" name="input_name" class="input_class" maxlength="5">
+						<div class="check_i"><i class="fas fa-check-circle"></i></div>
+					</div>
+				</div>
+				<div class="info_box ">
+					전화번호
+					<span class="err_msg">* 필수입력 정보입니다.</span>
+					<div class="phone_flex">
+						<div class="insert_phone ">
+							<input type="text" id="insert_phone1" name="insert_phone1" maxlength="3" class="input_class input_phone">
+						</div>
+						<div class="underbar">
+							-
+						</div>
+						<div class="insert_phone ">
+							<input type="text" id="insert_phone2" name="insert_phone2" maxlength="4" class="input_class input_phone">
+						</div>
+						<div class="underbar">
+							-
+						</div>
+						<div class="insert_phone ">
+							<input type="text" id="insert_phone3" name="insert_phone3" maxlength="4" class="input_class input_phone">
+							<div class="check_i"><i class="fas fa-check-circle"></i></div>
+						</div>
+	
+					</div>
+				</div>
+				<div class="info_box" >
+					이메일
+					<span class="err_msg">* 필수입력 정보입니다.</span>
+					<div id="mail_wrap" class="insert_div">
+						<div id="email_box">
+							<input type="text" id="input_mail" name="input_mail" class="input_class">
+						</div>
+						<div class="at">@</div>
+						<input type="text" id="email_url" name="email_url" >
+						<div class="space_box"> </div>
+						<select id="selmail">
+							<option value="directVal">직접입력</option>
+							<option value="naver.com">naver.com(네이버)</option>
+							<option value="daum.net">daum.net(다음카카오)</option>
+							<option value="gmail.com">gmail.com(구글)</option>
+							<option value="nate.com">nate.com(네이트)</option>
+						</select>
+					</div>
+				</div>
+				<div class="info_box" id="addr_box">
+					주소
+					<span class="err_msg">* 필수입력 정보입니다.</span>
+					<div>
+						<input type="text" class="addr addrbtn" id="sample6_postcode" name="sample6_postcode" placeholder="우편번호" readonly="readonly">
+						<input type="button" id="addr_btn" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+						<input type="text" class="addr addrbtn addr2" id="sample6_address" name="sample6_address" placeholder="주소" readonly="readonly"><br>
+						<input type="text" class="addr addr2" id="sample6_detailAddress" name="sample6_detailAddress" placeholder="상세주소">
+					</div>
+				</div>
+				<div class="ox_btn">
+					<div class="btn_box"><button class="btn_add">회원가입</button></div>
 				</div>
 			</div>
-			<div class="info_box" id="addr_box">
-				주소
-				<span class="err_msg">* 필수입력 정보입니다.</span>
-				<div>
-					<input type="text" class="addr" id="sample6_postcode" placeholder="우편번호">
-					<input type="button" id="addr_btn" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-					<input type="text" class="addr" id="sample6_address" placeholder="주소">
-					<input type="text" class="addr" id="sample6_detailAddress" placeholder="상세주소">
-				</div>
-			</div>
-			<div class="ox_btn">
-				<div class="btn_box">회원가입</div>
-			</div>
-		</div>
+		</form>
 	</div>
 	
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript" src="js/validation.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
+			$('.btn_add').click(function(){
+				$('#frm_mem').submit();
+			});
+			
 			$('.input_class').focus(function(event) {
 				$(this).css('border', '2px solid skyblue');
 			});
@@ -372,7 +397,6 @@
 				}
 			});
 
-
 			$('.btn_back').click(function(event) {
 				location.href = 'constract1.html';
 			});
@@ -405,89 +429,47 @@
 
 			//아이디
 			$('#input_id').keyup(function(event) {
-				var id = $.trim(uid.val());
-				if (id == '') {
+				var memId = $.trim(uid.val());
+				
+				var checkResult = joinValidate.checkId(memId);
+
+				if(checkResult.code != 0){
 					$('.err_msg').eq(0).css('display', 'inline-block')
 									   .css('color', '#ff1212')
-									   .text('* 필수입력 정보입니다.');
+									   .text(checkResult.desc);
 					$('.check_i').eq(0).css('color', '#dadada');
-					uid.select();
-					uid.focus();
-					return false;
-				} else if (id.match(regEmpty)) {
-					$('.err_msg').eq(0).css('display', 'inline-block')
-									   .css('color', '#ff1212')
-									   .text('* 공백없이 입력해주세요.');
-					$('.check_i').eq(0).css('color', '#ff1212');
-					return false;
-				} else if (id.length < 5 || id.length > 15) {
-					$('.err_msg').eq(0).css('display', 'inline-block')
-									   .css('color', '#ff1212')
-									   .text('* 5~15자 이내로 입력해주세요. ');
-					$('.check_i').eq(0).css('color', '#ff1212');
-					return false;
-				} else if (!idReg.test(id)) {
-					$('.err_msg').eq(0).css('display', 'inline-block')
-									   .css('color', '#ff1212')
-									   .text('* 올바른 아이디를 입력해주세요.');
-					$('.check_i').eq(0).css('color', '#ff1212');
 					return false;
 				} else {
-					 ajaxCheck(id);
+					if(ajaxCheck(memId) == "1"){
+						return true;
+					}
 				}
+				return false;
 			});
 
 			//비밀번호
 			$('#input_pw').keyup(function(event) {
-				var pw = $.trim(upw.val());
+				var memPw = $.trim(upw.val());
+				var memRepw = $.trim(urepw.val());
 				
-				if (pw == '') {
+				var checkResult = joinValidate.checkPw(memPw, memRepw);
+
+				if(checkResult.code != 0){
 					$('.err_msg').eq(1).css('display', 'inline-block')
 									   .css('color', '#ff1212')
-									   .text('* 필수입력 정보입니다.');
+									   .text(checkResult.desc);
 					$('.check_i').eq(1).css('color', '#dadada');
-					upw.focus();
-					return false;
-				} else if (pw.match(regEmpty)) {
-					$('.err_msg').eq(1).css('display', 'inline-block')
-									   .css('color', '#ff1212')
-									   .text('* 공백없이 입력해주세요.');
-					$('.check_i').eq(1).css('color', '#ff1212');
-					return false;
-				} else if (pw.length < 4 || pw.length > 12) {
-					$('.err_msg').eq(1).css('display', 'inline-block')
-									   .css('color', '#ff1212')
-									   .text('* 4~12자 이내로 입력해주세요. ');
-					$('.check_i').eq(1).css('color', '#ff1212');
-					return false;
-				} else if (!pwReg.test(pw)) {
-					$('.err_msg').eq(1).css('display', 'inline-block')
-									   .css('color', '#ff1212')
-									   .text('* 올바른 비밀번호를 입력해주세요.');
-					$('.check_i').eq(1).css('color', '#ff1212');
 					return false;
 				} else {
 					$('.err_msg').eq(1).css('display', 'inline-block')
 									   .css('color', 'mediumseagreen')
-									   .text('* 사용가능한 비밀번호 입니다.');
+									   .text(checkResult.desc);
 					$('.check_i').eq(1).css('color', 'mediumseagreen');
-					
-					var repw = $.trim(urepw.val());
-					if (repw != null || repw.length != 0){
-						if(repw == pw){
-							$('.err_msg').eq(2).css('display', 'inline-block')
-											   .text('* 비밀번호가 일치합니다.')
-											   .css('color', 'mediumseagreen');
-							$('.check_i').eq(2).css('color', 'mediumseagreen');
-						}  else {
-							$('.err_msg').eq(2).css('display', 'inline-block')
-											   .css('color', '#ff1212')
-											   .text('* 입력하신 비밀번호가 다릅니다.');
-							$('.check_i').eq(2).css('color', '#ff1212');
-						} 
-					}
+					return true;
 				}
+				return false;
 			});
+			
 
 			//비밀번호 확인
 			$('#input_repw').keyup(function(event) {
@@ -554,7 +536,7 @@
 				} else if (phone.indexOf("01") != 0) {
 					$('.err_msg').eq(4).css('display', 'inline-block')
 									   .css('color', '#ff1212')
-									   .text('* 휴대폰 번호가 유요하지 않습니다.');
+									   .text('* 휴대폰 번호가 유효하지 않습니다.');
 					$('.check_i').eq(4).css('color', '#ff1212');
 					return false;
 				} else if (phone.match(regEmpty)) {
@@ -576,6 +558,8 @@
 					$('.check_i').eq(4).css('color', 'mediumseagreen');
 				}
 			});
+			
+
 			
 			//이메일
 			$('#input_mail').keyup(function(event) {
@@ -611,12 +595,7 @@
 				var email = $.trim($('#input_mail').val());
 				var url = $.trim($('#email_url').val());
 				
-				if(url == "" || url.length == 0){
-					$('.err_msg').eq(5).css('display', 'inline-block')
-									   .css('color', '#ff1212')
-									   .text('* 필수입력 정보입니다.');
-					return false;
-				} else if(url.match(regEmpty)){
+				if(url.match(regEmpty)){
 					$('.err_msg').eq(5).css('display', 'inline-block')
 					 				   .css('color', '#ff1212')
 					 				   .text('* 공백없이 입력해주세요.');
@@ -636,6 +615,31 @@
 				}
 			});
 			
+			//우편번호, 주소 클릭시 다음주소API 창 출력
+			$('.addrbtn').click(function(){
+				var zipcode = $('.addrbtn').eq(0).val();
+				var addr = $('.addrbtn').eq(1).val();
+				
+				if(zipcode == "" || addr == ""){
+					$("#addr_btn").click();
+				}
+				
+			});
+			
+			//주소
+			$('#sample6_detailAddress').keyup(function(){
+				var dAddr = $.trim($(this).val());
+				
+				if(dAddr == "" || dAddr.length == 0){
+					$('.err_msg').eq(6).css('display', 'inline-block')
+									   .css('color', '#ff1212')
+									   .text('* 필수입력 정보입니다.');
+				} else {
+					$('.err_msg').eq(6).css('display', 'inline-block')
+									   .css('color', 'mediumseagreen')
+									   .text('');
+				}
+			});
 			
 		});
 	</script>
@@ -673,9 +677,11 @@
 	                    if(extraAddr !== ''){
 	                        extraAddr = ' (' + extraAddr + ')';
 	                    }
+	                 // 조합된 참고항목을 해당 필드에 넣는다.
+	                  //  document.getElementById("sample6_detailAddress").value = extraAddr;
 	                
 	                } else {
-	                    document.getElementById("sample6_extraAddress").value = '';
+	                    document.getElementById("sample6_detailAddress").value = '';
 	                }
 
 	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
@@ -687,30 +693,7 @@
 	        }).open();
 	    }
 	    
-	    function ajaxCheck(id){
-			$.ajax({
-				//url:"idCheck.makefree?id="+id 라고 쓰는 것을 url과 data로 나누어서 사용
-				url:"idCheck.makefree",
-				type:"POST",
-				dataType:"json",
-				data:"id="+id,
-				success:function(data){
-					if(data.message == "-1"){
-						$(".err_msg").eq(0).text("* 이미 사용중인 아이디 입니다.")
-									 .css("color", "#ff1212");
-						$('.check_i').eq(0).css('color', '#ff1212');
-					} else {
-						$('.err_msg').eq(0).css('display', 'inline-block')
-										   .css('color', 'mediumseagreen')
-										   .text('* 사용가능한 아이디 입니다.');
-						$('.check_i').eq(0).css('color', 'mediumseagreen');
-					}
-				},
-				error:function(){
-					alert("System Error!!!");
-				}
-			});	
-	    }
+	    
 	    
 	    
 	</script>

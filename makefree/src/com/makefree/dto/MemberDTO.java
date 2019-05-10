@@ -8,27 +8,30 @@ public class MemberDTO {
 	private String name;
 	private String phone;
 	private String email;
+	private String zipcode;
 	private String addr1;
 	private String addr2;
 	private Date regdate;
+	
 	
 	
 	public MemberDTO() {
 		super();
 	}
 
-	public MemberDTO(String id, String pw, String name, String phone, String email, String addr1, String addr2) {
+	public MemberDTO(String id, String pw, String name, String phone, String email, String zipcode, String addr1, String addr2) {
 		super();
 		this.id = id;
 		this.pw = pw;
 		this.name = name;
 		this.phone = phone;
 		this.email = email;
+		this.zipcode = zipcode;
 		this.addr1 = addr1;
 		this.addr2 = addr2;
 	}
 
-	public MemberDTO(String id, String pw, String name, String phone, String email, String addr1, String addr2,
+	public MemberDTO(String id, String pw, String name, String phone, String email, String zipcode, String addr1, String addr2,
 			Date regdate) {
 		super();
 		this.id = id;
@@ -36,6 +39,7 @@ public class MemberDTO {
 		this.name = name;
 		this.phone = phone;
 		this.email = email;
+		this.zipcode = zipcode;
 		this.addr1 = addr1;
 		this.addr2 = addr2;
 		this.regdate = regdate;
@@ -82,6 +86,14 @@ public class MemberDTO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	public String getZipcode() {
+		return zipcode;
+	}
+
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
+	}
 
 	public String getAddr1() {
 		return addr1;
@@ -107,12 +119,11 @@ public class MemberDTO {
 		this.regdate = regdate;
 	}
 
-	
 	@Override
 	public String toString() {
 		return "MemberDTO [id=" + id + ", pw=" + pw + ", name=" + name + ", phone=" + phone + ", email=" + email
-				+ ", addr1=" + addr1 + ", addr2=" + addr2 + ", regdate=" + regdate + "]";
+				+ ", zipcode=" + zipcode + ", addr1=" + addr1 + ", addr2=" + addr2 + ", regdate=" + regdate + "]";
 	}
-	
+
 	
 }

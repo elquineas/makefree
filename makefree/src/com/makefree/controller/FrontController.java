@@ -15,6 +15,7 @@ import com.makefree.action.ConstractAction;
 import com.makefree.action.IdCheckAction;
 import com.makefree.action.IndexAction;
 import com.makefree.action.MemberAction;
+import com.makefree.action.memberPlayAction;
 
 @WebServlet("/FrontController")
 public class FrontController extends HttpServlet {
@@ -47,6 +48,9 @@ public class FrontController extends HttpServlet {
 			forward = action.excute(request, response);
 		} else if(command.contentEquals("/idCheck.makefree")) {
 			action = new IdCheckAction();
+			forward = action.excute(request, response);
+		} else if(command.contentEquals("/memberPlay.makefree")) {
+			action = new memberPlayAction();
 			forward = action.excute(request, response);
 		}
 		
