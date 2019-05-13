@@ -10,9 +10,13 @@
 <link rel="stylesheet" href="${path}/css/common.css?v=1">
 <link rel="stylesheet" href="${path}/css/header.css?v=1">
 <link rel="stylesheet" href="${path}/css/index.css?v=1">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 <title>Insert title here</title>
+
+
 </head>
 <body>
+
 	<div id="modal">
 		<div id="modal_login">
 			<span id="close_btn">
@@ -46,63 +50,84 @@
 				<a href="#">비밀번호 찾기</a>&nbsp;<span class="si">|</span>&nbsp;
 				<a href="${path}/constract.makefree">회원가입</a>
 			</div>
-				
 		</div>	
 	</div>
 
-	<div class="header">
-		<div class="header_left">
-			<div class="logo">
-				<img src="${path}/images/logo2.png">
-			</div>
-		</div>
 
-		<div class="header_center">
+
+	<header>
+		<div class="header_space"></div>
+		<div class="header_wrap">
+			<div class="logo">
+				<img src="${path}/images/logo2-12.png">
+			</div>
+
 			<div class="search_wrap">
-				<input class="search_in" type="text" name="search_box" placeholder=" 검색">
-				<span class="search_icon">
-					<i class="fas fa-search"></i>
-				</span>
+				<input class="search_bar" type="text" name="search_box" placeholder=" 검색">
+				<div class="search_btn"><i class="fas fa-search"></i></div>
 			</div>
 			
-		</div>
-
-		<div class="header_right">
-			<span class="login_space"></span>
+			<div class="login_wrap">
 			<c:choose>
 				<c:when test="${empty sessionScope.loginUser}">
-					<span class="login_icon"> 
-						<span id="login_btn">로 그 인</span>
+					<span class="login_btn" id="login_btn"><i class="fas fa-user-alt"></i>
+						<div class="box_wrap">
+							<div class="box1"></div>
+							<div class="box2">로그인</div>
+						</div>
 					</span>
-					<span class="login_icon"> 
-						<a href="${path}/constract.makefree">회원가입</a>
+					<span class="space_btn"></span>
+					<span class="login_btn"><i class="fas fa-user-plus"></i>
+						<div class="box_wrap">
+							<div class="box1"></div>
+							<div class="box2">회원가입</div>
+						</div>
 					</span>
 				</c:when>
 				
 				<c:otherwise>
-					<span class="login_icon">
-						<span>${sessionScope.loginUser.name}</span>
-							(${sessionScope.loginUser.id})
+					<span class="login_btn green"><i class="fas fa-user-alt"></i>
+						<div class="box_wrap">
+							<div class="box1"></div>
+							<div class="box2">마이페이지</div>
+						</div>
 					</span>
-					<span class="login_icon"> 
-						<%-- <a href="${path}/loginOut.makefree">로그아웃</a> --%>
-						<!-- ajax는 모달창을 사용할때 사용  -->
-						<a href="#" class="logout_btn">로그아웃</a>
-						
+					<span class="space_btn"></span>
+					<span class="login_btn logout_btn"><i class="fas fa-door-open"></i>
+						<div class="box_wrap">
+							<div class="box1"></div>
+							<div class="box2 ">로그아웃</div>
+						</div>
 					</span>
-					
-				</c:otherwise>
+ 				</c:otherwise>
 			</c:choose>
-			<span class="login_icon"> 
-				<a href="#">고객센터</a>
-			</span>
-		</div>
-	</div>
-	
-	
-		
-		
 
+
+				<span class="space_btn"></span>
+				<span class="login_btn"><i class="fas fa-question"></i>
+					<div class="box_wrap">
+						<div class="box1"></div>
+						<div class="box2">고객센터</div>
+					</div>
+				</span>
+				<span class="space_btn"></span>
+				<span class="space_btn"></span>
+			</div>
+		</div>
+		<div class="header_space"></div>
+		<div class="header_menu">
+			<div class="s_menu_wrap">
+				<div class="s_menu" id="home_btn">HOME</div>
+				<div class="s_menu" id="new_btn">NEW</div>
+				<div class="s_menu" id="best_btn">BEST</div>
+				<div class="s_menu" id="menu1_btn">조리별</div>
+				<div class="s_menu">재료별</div>
+				<div class="s_menu">상황별</div>
+				<div class="s_menu">나라별</div>
+			</div>
+		</div>	
+	</header>
+	
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -195,6 +220,10 @@
 				
 				
 			});
+		});
+		
+		$('.logout_btn').click(function(event) {
+			location.href ='loginOut.makefree';
 		});
 		
 		
