@@ -14,6 +14,8 @@ import com.makefree.action.ActionForward;
 import com.makefree.action.ConstractAction;
 import com.makefree.action.IdCheckAction;
 import com.makefree.action.IndexAction;
+import com.makefree.action.LoginAjaxAction;
+import com.makefree.action.LoginOutAction;
 import com.makefree.action.MemberAction;
 import com.makefree.action.memberPlayAction;
 
@@ -51,6 +53,12 @@ public class FrontController extends HttpServlet {
 			forward = action.excute(request, response);
 		} else if(command.contentEquals("/memberPlay.makefree")) {
 			action = new memberPlayAction();
+			forward = action.excute(request, response);
+		} else if(command.contentEquals("/login.makefree")) {
+			action = new LoginAjaxAction();
+			forward = action.excute(request, response);
+		} else if(command.contentEquals("/loginOut.makefree")) {
+			action = new LoginOutAction();
 			forward = action.excute(request, response);
 		}
 		

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <!-- common.jsp 파일을 인클루드  -->
 <%@ include file="common.jsp" %>
-    
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +19,7 @@
 				<i class="fas fa-times"></i>
 			</span>
 			<div class="login_logo">
-				<img src="${path}/images/logo2.png">
+				<img src="${path}/images/logo2-12.png">
 			</div>
 			<div class="text_box">
 				<div class="input_box login_id">
@@ -31,6 +31,7 @@
 				</div>
 				<span class="err_code">비밀번호를 입력해주세요.</span>
 			</div>
+			<div class="total_err"></div>
 			<div class="login_box">
 				로 그 인
 			</div>
@@ -48,7 +49,6 @@
 				
 		</div>	
 	</div>
-
 
 	<div class="header">
 		<div class="header_left">
@@ -69,14 +69,30 @@
 
 		<div class="header_right">
 			<span class="login_space"></span>
-			<span class="login_icon"> 
-				<span id="login_btn">
-					로 그 인
-				</span>
-			</span>
-			<span class="login_icon"> 
-				<a href="${path}/constract.makefree">회원가입</a>
-			</span>
+			<c:choose>
+				<c:when test="${empty sessionScope.loginUser}">
+					<span class="login_icon"> 
+						<span id="login_btn">로 그 인</span>
+					</span>
+					<span class="login_icon"> 
+						<a href="${path}/constract.makefree">회원가입</a>
+					</span>
+				</c:when>
+				
+				<c:otherwise>
+					<span class="login_icon">
+						<span>${sessionScope.loginUser.name}</span>
+							(${sessionScope.loginUser.id})
+					</span>
+					<span class="login_icon"> 
+						<%-- <a href="${path}/loginOut.makefree">로그아웃</a> --%>
+						<!-- ajax는 모달창을 사용할때 사용  -->
+						<a href="#" class="logout_btn">로그아웃</a>
+						
+					</span>
+					
+				</c:otherwise>
+			</c:choose>
 			<span class="login_icon"> 
 				<a href="#">고객센터</a>
 			</span>
@@ -102,6 +118,9 @@
 			$('#inputid').focus();
 		});
 		$('#close_btn').click(function(event) {
+			$('#inputid').val("")
+			$('#inputpw').val("")
+			$('.err_code').css('display','none');
 			$('#modal').css('display', 'none');
 		});
 
@@ -121,26 +140,64 @@
 
 
 		$('.login_box').click(function(event) {
-			var valId = $('#inputid').val();
-			var valPw = $('#inputpw').val();
+			var valId = $.trim($('#inputid').val());
+			var valPw = $.trim($('#inputpw').val());
+			
+			var regEmpty = /\s/g;
 
-			if (valId == '') {
-				$('.err_code').first().css('display','block');
+			if (valId.length == 0 || valId == null) {
+				$('.err_code').first().css('display','block')
+									  .text('아이디를 입력해주세요.');;
 				$('#inputid').focus();
-				$('.err_code').last().css('display','none');
-				return;
+				$('.err_code').eq(1).css('display','none');
+				return false;
+			} else if(valId.match(regEmpty)) {
+				$('.err_code').first().css('display','block')
+									  .text('공백없이 아이디를 입력해주세요.');
+				$('#inputid').focus();
+				$('.err_code').eq(1).css('display','none');
+				return false;
 			} else {
 				$('.err_code').first().css('display','none');
 			}
-			if (valPw == '') {
-				$('.err_code').last().css('display','block');
+			if (valPw == '' || valPw == null) {
+				$('.err_code').eq(1).css('display','block')
+									 .text('비밀번호를 입력해주세요.');
 				$('#inputpw').focus();
-				return;
+				return false;
+			} else if(valPw.match(regEmpty)) {
+				$('.err_code').eq(1).css('display','block')
+									 .text('공백없이 패스워드를 입력해주세요.');
+				$('#inputpw').focus();
+				return false;
 			} else{
-				$('.err_code').last().css('display','none');
+				$('.err_code').eq(1).css('display','none');
 			}
-
+			
+			$.ajax({
+				url:"login.makefree",
+				type: "POST",
+				dataType: "json",
+				data: "id="+valId+"&pw="+valPw,
+				success: function(data){
+					if(data.message == "1"){
+						location.reload();
+					} else if(data.message == "-1") {
+						$('#inputid').focus();
+						$('.total_err').last().css('display','block')
+											  .css('color', '#ff1616')
+										      .text('회원 아이디 또는 비밀번호가 일치하지 않습니다.');
+					}
+				},
+				error:function(){
+					alert("System Error!!");
+				}
+				
+				
+			});
 		});
+		
+		
 	});
 </script>
 

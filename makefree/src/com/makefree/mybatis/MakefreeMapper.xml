@@ -31,6 +31,10 @@
 		VALUES(#{id},#{pw},#{name},#{phone},#{email},#{zipcode},#{addr1},#{addr2})
 	</insert>
 	
+	<select id="loginCheck" parameterType="com.makefree.dto.MemberDTO" resultType="com.makefree.dto.MemberDTO">
+		SELECT * FROM tbl_member
+		WHERE id=#{id} AND pw=#{pw}
+	</select>
 	
 	
 	

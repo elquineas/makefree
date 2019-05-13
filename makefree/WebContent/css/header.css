@@ -155,10 +155,10 @@
 }
 .login_box{
 	cursor: pointer;
-	margin: 0px auto;
+	margin: 10px auto 0;
 	width: 350px;
 	height: 50px;
-	background-color: skyblue;
+	background-color: #FFB400;
 	font-size: 30px;
 	line-height: 40px;
 	font-weight: 800;
@@ -176,7 +176,7 @@
 	border-bottom: 1px solid lightgray;
 }
 .modal_box >label{
-	background: url("images/ck.png") no-repeat;
+	background: url("../images/check_off.gif") no-repeat;
 	display: block;
 	height: 26px;
 	line-height: 25px;
@@ -191,7 +191,7 @@
 	margin-left: 10px; 
 }
 .modal_box > input:checked +label{
-	background-image: url("images/ck2.png");
+	background-image: url("../images/check_on.gif");
 }
 .member_box{
 	margin-top: 10px;
@@ -211,6 +211,11 @@
 	margin: -20px 0px;
 	left: 30px;
 	display: none;
+}
+.total_err{
+	height: 40px;
+	width: 100%;
+	text-align: center;
 }
 
 #banner{
