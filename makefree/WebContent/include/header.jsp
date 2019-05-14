@@ -16,7 +16,6 @@
 
 </head>
 <body>
-
 	<div id="modal">
 		<div id="modal_login">
 			<span id="close_btn">
@@ -29,11 +28,10 @@
 				<div class="input_box login_id">
 					<input type="text" placeholder="아 이 디" class="input_login" id="inputid">
 				</div>
-				<span class="err_code">아이디를 입력해주세요.</span>
 				<div class="input_box login_pw">
 					<input type="password" placeholder="패스워드" class="input_login" id="inputpw">
 				</div>
-				<span class="err_code">비밀번호를 입력해주세요.</span>
+				<span class="err_code"></span>
 			</div>
 			<div class="login_box">
 				로 그 인
@@ -85,15 +83,16 @@
 				</c:when>
 				
 				<c:otherwise>
-					<span class="login_btn green"><i class="fas fa-user-alt"></i>
+					<span class="login_btn info_box"><i class="fas fa-user-alt"></i>
 						<div class="box_wrap">
 							<div class="box1"></div>
 							<div class="box2">마이페이지</div>
 						</div>
 						<div class="info_menu">
-							<div class="info_btn">회원정보 수정</div>
-							<div class="info_btn">비밀번호 수정</div>
-							<div class="info_btn">회원탈퇴</div>
+							<div class="infobox1"></div>
+							<div class="info_btn" id="update_info">회원정보 수정</div>
+							<div class="info_btn" id="update_pw">비밀번호 수정</div>
+							<div class="info_btn" id="drop_mem">회원탈퇴</div>
 						</div>
 					</span>
 					<span class="space_btn"></span>
@@ -166,42 +165,28 @@
 		$('.exit_btn').click(function(event) {
 			$('.menu_modal').css('display', 'none');
 		});
+		var flag = 0;
+		
+		$('.info_box').click(function(event) {
 
-
+			if(flag == 0){
+				$('.info_menu').css('display', 'block');
+				flag = 1;
+			} else {
+				$('.info_menu').css('display', 'none');
+				flag = 0;
+			}
+			
+		});
+		
+		
+		
+		
 		$('.login_box').click(function(event) {
 			var valId = $.trim($('#inputid').val());
 			var valPw = $.trim($('#inputpw').val());
 			
 			var regEmpty = /\s/g;
-
-			if (valId.length == 0 || valId == null) {
-				$('.err_code').first().css('display','block')
-									  .text('아이디를 입력해주세요.');;
-				$('#inputid').focus();
-				$('.err_code').eq(1).css('display','none');
-				return false;
-			} else if(valId.match(regEmpty)) {
-				$('.err_code').first().css('display','block')
-									  .text('공백없이 아이디를 입력해주세요.');
-				$('#inputid').focus();
-				$('.err_code').eq(1).css('display','none');
-				return false;
-			} else {
-				$('.err_code').first().css('display','none');
-			}
-			if (valPw == '' || valPw == null) {
-				$('.err_code').eq(1).css('display','block')
-									 .text('비밀번호를 입력해주세요.');
-				$('#inputpw').focus();
-				return false;
-			} else if(valPw.match(regEmpty)) {
-				$('.err_code').eq(1).css('display','block')
-									 .text('공백없이 패스워드를 입력해주세요.');
-				$('#inputpw').focus();
-				return false;
-			} else{
-				$('.err_code').eq(1).css('display','none');
-			}
 			
 			$.ajax({
 				url:"login.makefree",
@@ -240,6 +225,16 @@
 				}
 			});
 			/* location.href ='loginOut.makefree'; ajax를 타지 않은 로그아웃 방법 */
+		});
+		
+		$('#update_info').click(function(event) {
+			location.href ='infoUpdate.makefree';
+		});
+		$('#update_pw').click(function(event) {
+			location.href ='pwUpdate.makefree';
+		});
+		$('#drop_mem').click(function(event) {
+			location.href ='dropMember.makefree';
 		});
 		
 		

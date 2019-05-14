@@ -36,6 +36,25 @@
 		WHERE id=#{id} AND pw=#{pw}
 	</select>
 	
+	<update id="memUpdate" parameterType="com.makefree.dto.MemberDTO">
+		UPDATE tbl_member SET
+		  name = #{name},
+		  phone = #{phone},
+		  email = #{email},
+		  zipcode = #{zipcode},
+		  addr1 = #{addr1},
+		  addr2 = #{addr2}
+		WHERE id = #{id}
+	</update>
 	
+	<select id="memOne" parameterType="String" resultType="com.makefree.dto.MemberDTO">
+		SELECT * FROM tbl_member
+		WHERE id=#{id}
+	</select>
+	
+	<select id="pwCheck" parameterType="hashmap" resultType="int">
+		SELECT COUNT(*) FROM tbl_member
+		WHERE id=#{id} AND pw=#{pw}
+	</select>
 	
 </mapper>

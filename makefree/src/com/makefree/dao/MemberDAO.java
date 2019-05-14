@@ -1,5 +1,7 @@
 package com.makefree.dao;
 
+import java.util.HashMap;
+
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
@@ -10,6 +12,9 @@ public class MemberDAO {
 	SqlSessionFactory sqlSessionFactory = SqlMapConfig.getSqlSession();
 	
 	SqlSession sqlSession;
+	MemberDTO mDto = null;
+	int result = 0;
+	boolean flag = false;
 	
 	private MemberDAO() {}
 	private static MemberDAO instance = new MemberDAO();
@@ -20,6 +25,7 @@ public class MemberDAO {
 	public String idCheck(String id) {
 		sqlSession = sqlSessionFactory.openSession();
 		String result = "";
+		
 		try {
 			result = sqlSession.selectOne("idCheck",id);
 			if(result != null) {
@@ -38,7 +44,6 @@ public class MemberDAO {
 	
 	public int memInsert(MemberDTO mDto) {
 		sqlSession = sqlSessionFactory.openSession(true);
-		int result = 0;
 		
 		try {
 			result = sqlSession.insert("memInsert", mDto);
@@ -50,4 +55,62 @@ public class MemberDAO {
 		
 		return result;
 	}
+	
+	public int memUpdate(MemberDTO mDto) {
+		sqlSession = sqlSessionFactory.openSession(true);
+
+		try {
+			result = sqlSession.update("memUpdate", mDto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
+		}
+		
+		return result;
+	}
+	
+	
+	
+	public MemberDTO memOne(String id) {
+		sqlSession = sqlSessionFactory.openSession(true);
+
+		try {
+			mDto = sqlSession.selectOne("memOne", id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
+		}
+		
+		return mDto;
+	}
+	
+	//비밀번호 재설정 : 현재 비밀번호와 입력한 비밀번호가 일치하는지 확인
+	public boolean pwCheck(String id, String pw) {
+		
+		sqlSession = sqlSessionFactory.openSession();
+		HashMap<String, String> map = new HashMap<>();
+		try {
+			map.put("id", id);
+			map.put("pw", pw);
+			result = sqlSession.selectOne("pwCheck", map);
+			
+			if(result ==1 ) {
+				flag=true;
+			} else {
+				flag=false;
+			}
+			System.out.println("flag >> " + flag);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
+		}
+		
+		return flag;
+	}
+	
+	
+	
 }

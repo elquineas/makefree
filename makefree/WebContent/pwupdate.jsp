@@ -268,7 +268,7 @@
 					<img src="${path}/images/logo2-12.png">
 				</div>
 				<div class="info_box">
-					현재 패스워드
+					현재 비밀번호
 					<span class="err_msg">* 필수입력 정보입니다.</span>
 					<div id="insert_pw" class="insert_div">
 						<input type="password" id="input_pw" name="input_pw" class="input_class" maxlength="12">
@@ -276,17 +276,17 @@
 				</div>
 				<div class="dod"></div>
 				<div class="info_box">
-					새로운 패스워드
+					새 비밀번호
 					<span class="err_msg">* 필수입력 정보입니다.</span>
 					<div id="insert_pw" class="insert_div">
-						<input type="password" id="input_pw" name="input_pw" class="input_class" maxlength="12">
+						<input type="password" id="input_npw" name="input_pw" class="input_class" maxlength="12">
 					</div>
 				</div>
 				<div class="info_box">
-					새로운 패스워드 확인
+					새 비밀번호 확인
 					<span class="err_msg">* 필수입력 정보입니다.</span>
-					<div id="insert_repw" class="insert_div">
-						<input type="password" id="input_repw" class="input_class" maxlength="12">
+					<div id="insert_nrpw" class="insert_div">
+						<input type="password" id="input_nrpw" class="input_class" maxlength="12">
 					</div>
 				</div>
 				<div class="ox_btn">
@@ -296,5 +296,98 @@
 			</div>
 		</form>
 	</div>
+	
+	<script type="text/javascript">
+		$(document).ready(function() {
+			
+			//ajax를 활용하여 입력한 비밀번호와 현재 유저의 비밀번호가 일치하는지 확인
+			$('#input_pw').keyup(function(){
+				var pw = $('#input_pw').val();
+				var id = "${sessionScope.loginUser.id}";
+				
+				if(pw != null || pw.length != 0){
+					$.ajax({
+						url: 'pwCheck.makefree',
+						type: 'POST',
+						dataType: 'json',
+						data: 'id='+id+'&pw='+pw,
+						success: function(data){
+							if(data.flag){
+								$('.err_msg').eq(0).css('display', 'inline-block')
+												   .css('color', 'mediumseagreen')
+												   .text('');
+							} else {
+								$('.err_msg').eq(0).css('display', 'inline-block')
+												   .css('color', '#ff1212')
+												   .text('* 현재비밀번호와 다릅니다.');
+							}
+						},
+						error:function(){
+							/* alert("System Error!!!"); */
+						}
+					});
+				}
+				
+			});
+			
+			var pwReg = RegExp(/^[a-zA-Z0-9]{4,12}$/);
+			
+			//비밀번호
+			$('#input_npw').keyup(function(event) {
+				var npw = $.trim($('#input_npw').val());
+				var nrpw = $.trim($('#input_nrpw').val());
+				
+
+				if(npw == "" || npw == null){
+					$('.err_msg').eq(1).css('display', 'inline-block')
+									   .css('color', '#ff1212')
+									   .text('* 비밀번호를 다시 입력해주세요.');
+					return false;
+				} else if(!pwReg.test(npw)){
+					$('.err_msg').eq(1).css('display', 'inline-block')
+									   .css('color', '#ff1212')
+									   .text('* 비밀번호를 다시 입력해주세요.');
+					return false;
+				} else {
+					$('.err_msg').eq(1).css('display', 'inline-block')
+									   .css('color', 'mediumseagreen')
+									   .text('* 사용가능한 비밀번호 입니다.');
+					return true;
+				}
+				return false;
+			});
+			
+
+			//비밀번호 확인
+			$('#input_nrpw').keyup(function(event) {
+				var npw = $.trim($('#input_npw').val());
+				var nrpw = $.trim($('#input_nrpw').val());
+				
+				if(nrpw == ''){
+					$('.err_msg').eq(2).css('display', 'inline-block')
+									   .css('color', '#ff1212')
+									   .text('* 비밀번호를 다시 입력해주세요.');
+					return false;
+				} else if (nrpw != npw){
+					$('.err_msg').eq(2).css('display', 'inline-block')
+									   .css('color', '#ff1212')
+									   .text('* 입력하신 비밀번호가 다릅니다.');
+					return false;
+				} else {
+					$('.err_msg').eq(2).css('display', 'inline-block')
+										.text('* 비밀번호가 일치합니다.')
+										.css('color', 'mediumseagreen');
+					return true;
+				}
+				return false;
+			});
+			
+			
+			
+		});
+	
+	</script>
+	
+	
 </body>
 </html>

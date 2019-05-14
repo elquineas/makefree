@@ -12,12 +12,17 @@ import javax.servlet.http.HttpServletResponse;
 import com.makefree.action.Action;
 import com.makefree.action.ActionForward;
 import com.makefree.action.ConstractAction;
+import com.makefree.action.DropMemberAction;
 import com.makefree.action.IdCheckAction;
 import com.makefree.action.IndexAction;
+import com.makefree.action.InfoUpdateAction;
+import com.makefree.action.InfoUpdatePlayAction;
 import com.makefree.action.LoginAjaxAction;
 import com.makefree.action.LoginOutAction;
 import com.makefree.action.LogoutAjaxAction;
 import com.makefree.action.MemberAction;
+import com.makefree.action.PwCheckAction;
+import com.makefree.action.PwUpdateAction;
 import com.makefree.action.memberPlayAction;
 
 @WebServlet("/FrontController")
@@ -63,6 +68,21 @@ public class FrontController extends HttpServlet {
 			forward = action.excute(request, response);
 		} else if(command.contentEquals("/logoutAjax.makefree")) {
 			action = new LogoutAjaxAction();
+			forward = action.excute(request, response);
+		} else if(command.contentEquals("/infoUpdate.makefree")) {
+			action = new InfoUpdateAction();
+			forward = action.excute(request, response);
+		} else if(command.contentEquals("/infoUpdatePlay.makefree")) {
+			action = new InfoUpdatePlayAction();
+			forward = action.excute(request, response);
+		} else if(command.contentEquals("/pwCheck.makefree")) {
+			action = new PwCheckAction();
+			forward = action.excute(request, response);
+		} else if(command.contentEquals("/pwUpdate.makefree")) {
+			action = new PwUpdateAction();
+			forward = action.excute(request, response);
+		} else if(command.contentEquals("/dropMember.makefree")) {
+			action = new DropMemberAction();
 			forward = action.excute(request, response);
 		}
 		

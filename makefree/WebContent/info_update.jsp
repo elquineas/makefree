@@ -249,7 +249,16 @@
 </head>
 <body>
 	<div class="body_wrap">
-		<form action="" method="POST" name="frm_mem" id="frm_mem">
+		<form action="infoUpdatePlay.makefree" method="POST" name="frm_mem" id="frm_mem">
+		<!-- form태그 사용법 -->
+		<!-- 1번 <button type="submit">회원수정</button> -->
+		<!-- 2번 <input type="submit" value="회원수정"> -->
+		<!-- 3번 <div id="div_btn">회원수정</div> -->
+		<!--     $(document).ready(function(){
+					$('#div_btn').click(function(){
+						$('#frm').submit();
+					});
+		         }); -->
 			<div class="body_box">
 				<div class="btn_back">
 					<i class="fas fa-arrow-left" id="back_btn"></i>
@@ -301,7 +310,7 @@
 							<input type="text" id="input_mail" name="input_mail" class="input_class">
 						</div>
 						<div class="at">@</div>
-						<input type="text" id="email_url" name="email_url" >
+						<input type="text" id="email_url" name="email_url"">
 						<div class="space_box"> </div>
 						<select id="selmail">
 							<option value="directVal">직접입력</option>
@@ -335,6 +344,49 @@
 	<script type="text/javascript" src="js/validation.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
+			var email = "${sessionScope.loginUser.email}";
+			var index = email.indexOf('@');
+			var emailid = email.substring(0, index);
+			var emailurl = email.substring(index + 1);
+			
+			$("#input_id").val("${sessionScope.loginUser.id}");
+			$("#input_name").val("${sessionScope.loginUser.name}");
+		/* 	$("#input_phone1").val("${sessionScope.loginUser.id}");  */
+			$("#input_mail").val(emailid);
+			$("#email_url").val(emailurl);
+
+			var phone = "${sessionScope.loginUser.phone}";
+			var phone1 = phone.substring(0, 3);
+			var phone2 = phone.substring(3, 7);
+			var phone3 = phone.substring(7, phone.length);
+
+			if(phone.length > 10){
+				$("#insert_phone1").val(phone1);
+				$("#insert_phone2").val(phone2);
+				$("#insert_phone3").val(phone3);
+			} else {
+				var phone2_1 = phone.substring(3, 6);
+				var phone3_1 = phone.substring(6, phone.length);
+
+				$("#insert_phone1").val(phone1);
+				$("#insert_phone2").val(phone2_1);
+				$("#insert_phone3").val(phone3_1);
+			}
+			
+			$("#sample6_postcode").val("${sessionScope.loginUser.zipcode}");
+			$("#sample6_address").val("${sessionScope.loginUser.addr1}");
+			$("#sample6_detailAddress").val("${sessionScope.loginUser.addr2}");
+			
+			
+			$('.btn_update').click(function(){
+				$("#frm_mem").submit();
+			});
+			
+			
+			
+			
+			
+			
 			$('.btn_add').click(function(){
 				$('#frm_mem').submit();
 			});
