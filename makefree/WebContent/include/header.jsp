@@ -35,7 +35,6 @@
 				</div>
 				<span class="err_code">비밀번호를 입력해주세요.</span>
 			</div>
-			<div class="total_err"></div>
 			<div class="login_box">
 				로 그 인
 			</div>
@@ -90,6 +89,11 @@
 						<div class="box_wrap">
 							<div class="box1"></div>
 							<div class="box2">마이페이지</div>
+						</div>
+						<div class="info_menu">
+							<div class="info_btn">회원정보 수정</div>
+							<div class="info_btn">비밀번호 수정</div>
+							<div class="info_btn">회원탈퇴</div>
 						</div>
 					</span>
 					<span class="space_btn"></span>
@@ -209,7 +213,7 @@
 						location.reload();
 					} else if(data.message == "-1") {
 						$('#inputid').focus();
-						$('.total_err').last().css('display','block')
+						$('.err_code').last().css('display','block')
 											  .css('color', '#ff1616')
 										      .text('회원 아이디 또는 비밀번호가 일치하지 않습니다.');
 					}
@@ -223,7 +227,19 @@
 		});
 		
 		$('.logout_btn').click(function(event) {
-			location.href ='loginOut.makefree';
+
+			$.ajax({
+				url:"logoutAjax.makefree",
+				type: "POST",
+				dataType: "json",
+				success: function(data){
+					location.reload();	
+				},
+				error:function(){
+					alert("System Error!!");
+				}
+			});
+			/* location.href ='loginOut.makefree'; ajax를 타지 않은 로그아웃 방법 */
 		});
 		
 		

@@ -88,7 +88,9 @@ header{
 .login_btn:hover{
 	background-color: #FFB400;
 }
-
+.login_btn:hover > .info_menu{
+	display: block;
+}
 .space_btn{
 	flex: 1;
 }
@@ -128,18 +130,18 @@ header{
 }
 .box1{
 	margin-left: 20px;
-	margin-top: 10px;
+	margin-top: -53px;
 	height: 11px;
 	width: 11px;
 	border: 1px solid black;
-	border-right: 0;
-	border-bottom: 0;
+	border-left: 0;
+	border-top: 0;
 	transform: translate(-50%) rotate(45deg);
 	background: white;
 }
 .box2{
 	margin-left: -15px;
-	margin-top: -6px;
+	margin-top: -33px;
 	height: 25px;
 	width: 70px;
 	border: 1px solid black;
@@ -148,6 +150,25 @@ header{
 	color: gray;
 	background: white;
 	border-radius: 5px;
+}
+.info_menu{
+	position: absolute;
+	display:none;
+	margin-left:-30px;
+	margin-top: 10px;
+	width: 100px;
+	border: 1px solid black;
+	font-size: 12px;
+	color: black;
+	background-color: lightgray;
+}
+.info_btn{
+	line-height:30px;
+	width: 100px;
+	height: 30px;
+}
+.info_btn:hover{
+	background-color: gray;
 }
 .green{
 	background-color: mediumseagreen;
@@ -210,7 +231,7 @@ header{
 	display: none;
 }
 .total_err{
-	height: 40px;
+	height: 20px;
 	width: 100%;
 	text-align: center;
 }
