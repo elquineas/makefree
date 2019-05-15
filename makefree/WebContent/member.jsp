@@ -236,6 +236,13 @@
 		font-weight: 600;
 		cursor: pointer;
 	}
+	.err_msg_all{
+		top: 3px;
+		color: #ff1212;
+		display: none;
+		text-align: center;
+		font-size: 20px;
+	}
 </style>
 </head>
 <body>
@@ -331,9 +338,10 @@
 						<input type="text" class="addr addrbtn addr2" id="sample6_address" name="sample6_address" placeholder="주소" readonly="readonly"><br>
 						<input type="text" class="addr addr2" id="sample6_detailAddress" name="sample6_detailAddress" placeholder="상세주소">
 					</div>
+					<span class="err_msg_all">* 필수입력 정보입니다.</span>
 				</div>
 				<div class="ox_btn">
-					<div class="btn_box"><button class="btn_add">회원가입</button></div>
+					<div class="btn_box"><button class="btn_add" type="button">회원가입</button></div>
 				</div>
 			</div>
 		</form>
@@ -343,9 +351,23 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript" src="js/validation.js"></script>
 	<script type="text/javascript">
+	
 		$(document).ready(function() {
+			
+			$('.btn_back').click(function(event) {
+				location.href = 'index.makefree';
+			});
+			
+			var flag = 0;
 			$('.btn_add').click(function(){
-				$('#frm_mem').submit();
+				if(flag == 1){
+					$('#frm_mem').submit();
+				}else{
+					$('.err_msg_all').css('display', 'inline-block')
+									 .css('color', '#ff1212')
+									 .text('* 모든정보를 올바르게 입력해주세요.');
+				}
+				
 			});
 			
 			$('.input_class').focus(function(event) {
@@ -397,10 +419,8 @@
 				}
 			});
 
-			$('.btn_back').click(function(event) {
-				location.href = 'constract1.html';
-			});
-
+			
+				
 			var
 				uid = $('#input_id'),
 				upw = $('#input_pw'),
@@ -437,13 +457,16 @@
 					$('.err_msg').eq(0).css('display', 'inline-block')
 									   .css('color', '#ff1212')
 									   .text(checkResult.desc);
-					$('.check_i').eq(0).css('color', '#dadada');
+					$('.check_i').eq(0).css('color', '#ff1212');
+					flag = 0;
 					return false;
 				} else {
 					if(ajaxCheck(memId) == "1"){
+						flag = 1;
 						return true;
 					}
 				}
+				flag = 0;
 				return false;
 			});
 
@@ -458,21 +481,48 @@
 					$('.err_msg').eq(1).css('display', 'inline-block')
 									   .css('color', '#ff1212')
 									   .text(checkResult.desc);
-					$('.check_i').eq(1).css('color', '#dadada');
+					$('.check_i').eq(1).css('color', '#ff1212');
+					flag = 0;
 					return false;
 				} else {
 					$('.err_msg').eq(1).css('display', 'inline-block')
 									   .css('color', 'mediumseagreen')
 									   .text(checkResult.desc);
 					$('.check_i').eq(1).css('color', 'mediumseagreen');
+					flag = 1;
 					return true;
 				}
+				flag = 0;
 				return false;
 			});
 			
 
 			//비밀번호 확인
 			$('#input_repw').keyup(function(event) {
+				var memPw = $.trim(upw.val());
+				var memRepw = $.trim(urepw.val());
+				
+				var checkResult = joinValidate.checkRpw(memPw, memRepw);
+
+				if(checkResult.code != 0){
+					$('.err_msg').eq(2).css('display', 'inline-block')
+									   .css('color', '#ff1212')
+									   .text(checkResult.desc);
+					$('.check_i').eq(2).css('color', '#ff1212');
+					flag = 0;
+					return false;
+				} else {
+					$('.err_msg').eq(2).css('display', 'inline-block')
+									   .css('color', 'mediumseagreen')
+									   .text(checkResult.desc);
+					$('.check_i').eq(2).css('color', 'mediumseagreen');
+					flag = 1;
+					return true;
+				}
+				flag = 0;
+				return false;
+				
+				/* 
 				var repw = $.trim(urepw.val());
 				var pw = $.trim(upw.val());
 				if(repw == ''){
@@ -480,17 +530,23 @@
 									   .css('color', '#ff1212')
 									   .text('* 비밀번호를 다시 입력해주세요.');
 					$('.check_i').eq(2).css('color', '#dadada');
+					flag = 0;
 					return false;
 				} else if (repw != pw){
 					$('.err_msg').eq(2).css('display', 'inline-block')
 									   .css('color', '#ff1212')
 									   .text('* 입력하신 비밀번호가 다릅니다.');
 					$('.check_i').eq(2).css('color', '#ff1212');
+					flag = 0;
 					return false;
 				} else {
 					$('.err_msg').eq(2).css('display', 'inline-block').text('* 비밀번호가 일치합니다.').css('color', 'mediumseagreen');
 					$('.check_i').eq(2).css('color', 'mediumseagreen');
+					flag = 1;
+					return true;
 				}
+				flag = 0;
+				return false; */
 			});
 			
 			//이름
@@ -500,27 +556,33 @@
 					$('.err_msg').eq(3).css('display', 'inline-block')
 									   .css('color', '#ff1212')
 									   .text('* 필수입력 정보입니다.');
-					$('.check_i').eq(3).css('color', '#dadada');
-
+					$('.check_i').eq(3).css('color', '#ff1212');
+					flag = 0;
 					return false;
 				} else if (name.match(regEmpty)) {
 					$('.err_msg').eq(3).css('display', 'inline-block')
 									   .css('color', '#ff1212')
 									   .text('* 공백없이 입력해주세요.');
 					$('.check_i').eq(3).css('color', '#ff1212');
+					flag = 0;
 					return false;
 				} else if (!nameReg.test(name)) {
 					$('.err_msg').eq(3).css('display', 'inline-block')
 									   .css('color', '#ff1212')
 									   .text('* 올바른 이름을 입력해주세요.');
 					$('.check_i').eq(3).css('color', '#ff1212');
+					flag = 0;
 					return false;
 				} else {
 					$('.err_msg').eq(3).css('display', 'inline-block')
 									   .css('color', 'mediumseagreen')
 									   .text('');
 					$('.check_i').eq(3).css('color', 'mediumseagreen');
+					flag = 1;
+					return true;
 				}
+				flag = 0;
+				return false;
 			});
 
 			//전화번호
@@ -531,32 +593,40 @@
 					$('.err_msg').eq(4).css('display', 'inline-block')
 									   .css('color', '#ff1212')
 									   .text('* 필수입력 정보입니다.');
-					$('.check_i').eq(4).css('color', '#dadada');
+					$('.check_i').eq(4).css('color', '#ff1212');
+					flag = 0;
 					return false;
 				} else if (phone.indexOf("01") != 0) {
 					$('.err_msg').eq(4).css('display', 'inline-block')
 									   .css('color', '#ff1212')
 									   .text('* 휴대폰 번호가 유효하지 않습니다.');
 					$('.check_i').eq(4).css('color', '#ff1212');
+					flag = 0;
 					return false;
 				} else if (phone.match(regEmpty)) {
 					$('.err_msg').eq(4).css('display', 'inline-block')
 									   .css('color', '#ff1212')
 									   .text('* 공백없이 입력해주세요.');
 					$('.check_i').eq(4).css('color', '#ff1212');
+					flag = 0;
 					return false;
 				} else if (!phoneReg.test(phone) || phone.length < 11) {
 					$('.err_msg').eq(4).css('display', 'inline-block')
 									   .css('color', '#ff1212')
 									   .text('* 올바른 번호를 입력해주세요.');
 					$('.check_i').eq(4).css('color', '#ff1212');
+					flag = 0;
 					return false;
 				} else {
 					$('.err_msg').eq(4).css('display', 'inline-block')
 									   .css('color', 'mediumseagreen')
 									   .text('');
 					$('.check_i').eq(4).css('color', 'mediumseagreen');
+					flag = 1;
+					return true;
 				}
+				flag = 0;
+				return false;
 			});
 			
 
@@ -570,11 +640,13 @@
 					$('.err_msg').eq(5).css('display', 'inline-block')
 									   .css('color', '#ff1212')
 									   .text('* 필수입력 정보입니다.');
+					flag = 0;
 					return false;
 				} else if(email.match(regEmpty)){
 					$('.err_msg').eq(5).css('display', 'inline-block')
 					 				   .css('color', '#ff1212')
 					 				   .text('* 공백없이 입력해주세요.');
+					flag = 0;
 					return false;
 				} else if (url != "" || url.length != 0){
 					var fullMail = email+"@"+url;
@@ -582,13 +654,18 @@
 						$('.err_msg').eq(5).css('display', 'inline-block')
 		 								   .css('color', '#ff1212')
 		 								   .text('* 올바른 이메일을 입력해주세요.');
+						flag = 0;
 						return false;
 					} else {
 						$('.err_msg').eq(5).css('display', 'inline-block')
 										   .css('color', 'mediumseagreen')
 										   .text('* 사용가능한 이메일 입니다.');
+						flag = 1;
+						return true;
 					}
 				}
+				flag = 0;
+				return false;
 			});
 			
 			$('#email_url').keyup(function(event) {
@@ -599,6 +676,7 @@
 					$('.err_msg').eq(5).css('display', 'inline-block')
 					 				   .css('color', '#ff1212')
 					 				   .text('* 공백없이 입력해주세요.');
+					flag = 0;
 					return false;
 				} else if (url != "" || url.length != 0){
 					var fullMail = email+"@"+url;
@@ -606,13 +684,18 @@
 						$('.err_msg').eq(5).css('display', 'inline-block')
 		 								   .css('color', '#ff1212')
 		 								   .text('* 올바른 이메일을 입력해주세요.');
+						flag = 0;
 						return false;
 					} else {
 						$('.err_msg').eq(5).css('display', 'inline-block')
 										   .css('color', 'mediumseagreen')
 										   .text('* 사용가능한 이메일 입니다.');
+						flag = 1;
+						return true;
 					}
 				}
+				flag = 0;
+				return false;
 			});
 			
 			//우편번호, 주소 클릭시 다음주소API 창 출력
@@ -634,11 +717,17 @@
 					$('.err_msg').eq(6).css('display', 'inline-block')
 									   .css('color', '#ff1212')
 									   .text('* 필수입력 정보입니다.');
+					flag = 0;
+					return false;
 				} else {
 					$('.err_msg').eq(6).css('display', 'inline-block')
 									   .css('color', 'mediumseagreen')
 									   .text('');
+					flag = 1;
+					return true;
 				}
+				flag = 0;
+				return false;
 			});
 			
 		});

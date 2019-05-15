@@ -148,7 +148,34 @@ var joinValidate = {
 			}
 			return this.resultCode.success_pw;
 		}
-	}
+	},
+	checkRpw : function(memPw, memRepw){
+		var pwReg = RegExp(/^[a-zA-Z0-9]{4,12}$/);
+		var regEmpty = /\s/g;
+		
+		if (memRepw == '') {
+			return this.resultCode.empty_val;
+		} else {
+			if (memPw != null || memPw.length != 0){
+				if(memRepw == memPw){
+					$('.err_msg').eq(2).css('display', 'inline-block')
+									   .text(this.resultCode.success_repw.desc)
+									   .css('color', 'mediumseagreen');
+					$('.check_i').eq(2).css('color', 'mediumseagreen');
+				}  else {
+					$('.err_msg').eq(2).css('display', 'inline-block')
+									   .css('color', '#ff1212')
+									   .text(this.resultCode.other_repw.desc);
+					$('.check_i').eq(2).css('color', '#ff1212');
+					return this.resultCode.other_repw.desc;
+				} 
+			}
+			return this.resultCode.success_repw;
+		}
+		
+		
+		
+	}	
 }
 
 
@@ -181,3 +208,30 @@ function ajaxCheck(memId){
 	});	
 }
 
+function ajaxPwCheck(id, pw){
+	var return_val = ""; 
+	$.ajax({
+		url: 'pwCheck.makefree',
+		type: 'POST',
+		dataType: 'json',
+		data: 'id='+id+'&pw='+pw,
+		async: false,
+		success: function(data){
+			if(data.flag){
+				$('.pwAjax').css('display', 'inline-block')
+							.css('color', 'mediumseagreen')
+							.text('* 비밀번호가 같습니다.');
+				return_val = true;
+			} else {
+				$('.pwAjax').css('display', 'inline-block')
+							.css('color', '#ff1212')
+							.text('* 비밀번호가 다릅니다.');
+				return_val = false;
+			}
+		},
+		error:function(){
+			alert("System Error!!!");
+		}
+	});
+	return return_val;
+}

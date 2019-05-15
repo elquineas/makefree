@@ -12,7 +12,22 @@
 <link rel="stylesheet" href="${path}/css/index.css?v=1">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 <title>Insert title here</title>
-
+<style type="text/css">
+.box2_2{
+	width: 100%;
+	height: 100%;
+	cursor: pointer;
+	background-color: #FFB400;
+	font-size: 30px;
+	line-height: 40px;
+	font-weight: 800;
+	color: white;
+	border:none;
+}
+.box2_2:hover{
+	background-color: #FFBB00;
+}
+</style>
 
 </head>
 <body>
@@ -34,7 +49,7 @@
 				<span class="err_code"></span>
 			</div>
 			<div class="login_box">
-				로 그 인
+				<button class="box2_2" type="button">로 그 인</button>
 			</div>
 			<div class="modal_box">
 				<input type="checkbox" id="loginck">
@@ -74,7 +89,7 @@
 						</div>
 					</span>
 					<span class="space_btn"></span>
-					<span class="login_btn"><i class="fas fa-user-plus"></i>
+					<span class="login_btn" id="insert_btn"><i class="fas fa-user-plus"></i>
 						<div class="box_wrap">
 							<div class="box1"></div>
 							<div class="box2">회원가입</div>
@@ -84,15 +99,14 @@
 				
 				<c:otherwise>
 					<span class="login_btn info_box"><i class="fas fa-user-alt"></i>
-						<div class="box_wrap">
-							<div class="box1"></div>
-							<div class="box2">마이페이지</div>
-						</div>
 						<div class="info_menu">
-							<div class="infobox1"></div>
 							<div class="info_btn" id="update_info">회원정보 수정</div>
 							<div class="info_btn" id="update_pw">비밀번호 수정</div>
 							<div class="info_btn" id="drop_mem">회원탈퇴</div>
+						</div>
+						<div class="box_wrap">
+							<div class="box1"></div>
+							<div class="box2">마이페이지</div>
 						</div>
 					</span>
 					<span class="space_btn"></span>
@@ -140,7 +154,6 @@
 		$('.search_in').blur(function(event) {
 			$('.search_in').css('border', '1px solid gray');
 		});
-
 		$('#login_btn').click(function(event) {
 			$('#modal').css('display', 'flex');
 			$('#inputid').focus();
@@ -167,13 +180,30 @@
 		});
 		var flag = 0;
 		
+		
 		$('.info_box').click(function(event) {
-
 			if(flag == 0){
-				$('.info_menu').css('display', 'block');
+				setTimeout(function() {
+					$('#update_info').css('margin-left', '20px').css('transition', '.4s');
+				}, 0);
+				setTimeout(function() {
+					$('#update_pw').css('margin-left', '0px').css('transition', '.4s');
+				}, 200);
+				setTimeout(function() {
+					$('#drop_mem').css('margin-left', '20px').css('transition', '.4s');
+				}, 400);
+
 				flag = 1;
 			} else {
-				$('.info_menu').css('display', 'none');
+				setTimeout(function() {
+					$('#update_info').css('margin-left', '200px').css('transition', '.4s');
+				}, 400);
+				setTimeout(function() {
+					$('#update_pw').css('margin-left', '180px').css('transition', '.4s');
+				}, 200);
+				setTimeout(function() {
+					$('#drop_mem').css('margin-left', '200px').css('transition', '.4s');
+				}, 0);
 				flag = 0;
 			}
 			
@@ -226,6 +256,13 @@
 			});
 			/* location.href ='loginOut.makefree'; ajax를 타지 않은 로그아웃 방법 */
 		});
+		$('#insert_btn').click(function(event) {
+			location.href ='constract.makefree';
+		});
+		
+		
+		
+		
 		
 		$('#update_info').click(function(event) {
 			location.href ='infoUpdate.makefree';

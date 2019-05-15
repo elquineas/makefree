@@ -150,25 +150,39 @@ header{
 }
 .info_menu{
 	position: absolute;
-	display:none;
-/* 	margin-left:-30px; */
-	margin-top: 0px;
-	width: 100px;
-	border: 1px solid black;
+	display:block;
+	margin-top: -73px;
+	margin-left:-120px;
+	width: 115px;
 	font-size: 12px;
 	color: black;
-	background-color: lightgray;
+	justify-content: space-between;
+	/* border:1px solid blue; */
+	overflow:hidden;
 }
 .infobox1{
 	
 }
 .info_btn{
+	margin-top:5px;
+	background-color: #dadada;
 	line-height:30px;
-	width: 100px;
+	width: 90px;
 	height: 30px;
+	border-radius: 20px;
 }
+#update_info{
+	margin-left:200px;
+}
+#update_pw{
+	margin-left:180px;
+}
+#drop_mem{
+	margin-left:200px;
+}
+
 .info_btn:hover{
-	background-color: gray;
+	background-color: #eaeaea;
 }
 .info_box{
 	background-color: mediumseagreen;

@@ -14,7 +14,7 @@ public class LogoutAjaxAction implements Action{
 	@Override
 	public ActionForward excute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-HttpSession session = request.getSession();
+		HttpSession session = request.getSession();
 		
 		if(session != null) {
 			// Session을 초기화 = 로그아웃

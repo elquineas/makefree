@@ -111,6 +111,32 @@ public class MemberDAO {
 		return flag;
 	}
 	
+	//비밀번호 재설정
+	public int pwUpdate(String id, String pw) {
+		sqlSession = sqlSessionFactory.openSession(true);
+		HashMap<String, String> map = new HashMap<>();
+		map.put("id", id);
+		map.put("pw", pw);
+		try {
+			result = sqlSession.update("pwUpdate", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
+		}
+		return result;
+	}
 	
-	
+	//회원삭제(완전삭제)
+	public int memDelete(String id) {
+		sqlSession = sqlSessionFactory.openSession(true);
+		try {
+			result = sqlSession.delete("memDelete",id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
+		}
+		return result;
+	}
 }

@@ -13,6 +13,7 @@ import com.makefree.action.Action;
 import com.makefree.action.ActionForward;
 import com.makefree.action.ConstractAction;
 import com.makefree.action.DropMemberAction;
+import com.makefree.action.DropMemberPlayAction;
 import com.makefree.action.IdCheckAction;
 import com.makefree.action.IndexAction;
 import com.makefree.action.InfoUpdateAction;
@@ -23,6 +24,7 @@ import com.makefree.action.LogoutAjaxAction;
 import com.makefree.action.MemberAction;
 import com.makefree.action.PwCheckAction;
 import com.makefree.action.PwUpdateAction;
+import com.makefree.action.PwUpdatePlayAction;
 import com.makefree.action.memberPlayAction;
 
 @WebServlet("/FrontController")
@@ -81,10 +83,18 @@ public class FrontController extends HttpServlet {
 		} else if(command.contentEquals("/pwUpdate.makefree")) {
 			action = new PwUpdateAction();
 			forward = action.excute(request, response);
+		} else if(command.contentEquals("/pwUpdatePlay.makefree")) {
+			action = new PwUpdatePlayAction();
+			forward = action.excute(request, response);
 		} else if(command.contentEquals("/dropMember.makefree")) {
 			action = new DropMemberAction();
 			forward = action.excute(request, response);
-		}
+		} else if(command.contentEquals("/dropMemberPlay.makefree")) {
+			action = new DropMemberPlayAction();
+			forward = action.excute(request, response);
+		} 
+		
+		
 		
 		
 		

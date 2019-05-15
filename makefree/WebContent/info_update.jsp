@@ -332,7 +332,6 @@
 					</div>
 				</div>
 				<div class="ox_btn">
-					<div class="btn_box"><button class="btn_close">취 소</button></div>
 					<div class="btn_box"><button class="btn_update">수 정</button></div>
 				</div>
 			</div>
@@ -441,7 +440,7 @@
 			});
 
 			$('.btn_back').click(function(event) {
-				location.href = 'constract1.html';
+				location.href = 'index.makefree';
 			});
 
 			var
