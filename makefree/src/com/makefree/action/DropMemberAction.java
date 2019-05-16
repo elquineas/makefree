@@ -12,7 +12,7 @@ public class DropMemberAction implements Action{
 	@Override
 	public ActionForward excute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String url = "dropmem.jsp";
+		String url = "member/dropmem.jsp";
 		
 		HttpSession session = request.getSession();
 		

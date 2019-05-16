@@ -67,7 +67,7 @@
 
 
 
-	<header>
+	<header class="header_body">
 		<div class="header_space"></div>
 		<div class="header_wrap">
 			<div class="logo">
@@ -140,7 +140,7 @@
 				<div class="s_menu" id="menu1_btn">조리별</div>
 				<div class="s_menu">재료별</div>
 				<div class="s_menu">상황별</div>
-				<div class="s_menu">나라별</div>
+				<div class="s_menu">게시판</div>
 			</div>
 		</div>	
 	</header>
@@ -184,25 +184,25 @@
 		$('.info_box').click(function(event) {
 			if(flag == 0){
 				setTimeout(function() {
-					$('#update_info').css('margin-left', '20px').css('transition', '.4s');
+					$('#update_info').css('margin-left', '20px').css('transition', '.25s');
 				}, 0);
 				setTimeout(function() {
-					$('#update_pw').css('margin-left', '0px').css('transition', '.4s');
-				}, 200);
+					$('#update_pw').css('margin-left', '0px').css('transition', '.25s');
+				}, 150);
 				setTimeout(function() {
-					$('#drop_mem').css('margin-left', '20px').css('transition', '.4s');
-				}, 400);
+					$('#drop_mem').css('margin-left', '20px').css('transition', '.25s');
+				}, 300);
 
 				flag = 1;
 			} else {
 				setTimeout(function() {
-					$('#update_info').css('margin-left', '200px').css('transition', '.4s');
-				}, 400);
+					$('#update_info').css('margin-left', '200px').css('transition', '.25s');
+				}, 300);
 				setTimeout(function() {
-					$('#update_pw').css('margin-left', '180px').css('transition', '.4s');
-				}, 200);
+					$('#update_pw').css('margin-left', '180px').css('transition', '.25s');
+				}, 150);
 				setTimeout(function() {
-					$('#drop_mem').css('margin-left', '200px').css('transition', '.4s');
+					$('#drop_mem').css('margin-left', '200px').css('transition', '.25s');
 				}, 0);
 				flag = 0;
 			}

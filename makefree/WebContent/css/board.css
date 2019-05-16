@@ -1,0 +1,216 @@
+@charset "utf-8";
+*{
+	margin: 0;
+	padding: 0;
+}
+body{
+	margin: 0;
+	padding: 0;
+}
+.board_wrap{
+	box-sizing: border-box;
+	margin: 30px auto 0;
+	padding: 90px;
+	width: 1200px;
+	font-size: 18px;
+	letter-spacing : -2px;
+	border-radius: 20px;
+	border: 1px solid #dadada;
+}
+/* 게시판 헤더부분 */
+.board_header{
+	width:100%;
+	height: 100px;
+	/* border-bottom: 1px solid gray; */
+}
+.board_title{
+	border-top: 1px solid orange;
+	height: 65px;
+	font-size: 35px;
+	line-height: 60px;
+}
+.board_array{
+	height: 35px;
+	/*border: 1px solid orange;*/
+	display: flex;
+}
+.array_content{
+	width: 70px;
+	line-height: 30px;
+}
+.array_content:hover{
+	color: red;
+	cursor: pointer;
+}
+
+
+.board_body{
+	/*border: 1px solid orange;*/
+	margin-bottom: 10px;
+}
+.content_title{
+	font-weight: 700;
+	display: flex;
+}
+.content_title > .content_box{
+	background-color: lightgray;
+}
+.content_box{
+	height: 40px;
+	border-right: 1px solid lightgray;
+	border-bottom: 1px solid lightgray;
+	text-align: center;
+	font-size: 20px;
+	line-height: 40px;
+	box-sizing: border-box;
+	
+}
+.board_content_num{
+	width: 70px;
+}
+.board_content_title{
+	width: 560px;
+}
+.board_content_user{
+	width: 120px;
+}
+.board_content_day{
+	width: 140px;
+}
+.board_content_good{
+	width: 90px;
+}
+.board_content_good > i{
+	color:#FF4848;
+}
+.board_content_view{
+	width: 90px;
+}
+.board_content_view > i{
+	color: #B2CCFF;
+}
+.board_content_file{
+	width: 70px;
+	border-right: 0;
+}
+.board_content_file > i{
+	line-height: 40px!important;
+}
+
+.content_body{
+	display: flex;
+	
+}
+.content_body:nth-child(odd){
+	background-color: #FFFFE4;
+}
+.content_body > .board_content_title{
+	padding-left : 20px;
+	text-align: left;
+}
+.content_body > .board_content_file{
+	color: slateblue;	
+}
+.content_body:hover{
+	background-color: #FFE08C; 
+	cursor: pointer;
+}
+
+
+.board_footer_btn{
+	display: flex;
+	height: 60px;
+	line-height: 35px;
+	border-bottom: 1px solid #FFB400;
+}
+
+.border_page{
+	text-align: center;
+	margin-bottom: 20px;
+	line-height: 15px;
+}
+
+
+.board_search{
+	display: flex;
+	width: 1040px;
+	height: 40px;
+}
+#selset_board{
+	width: 100px;
+	/*margin-top: 5px;*/
+/* 			height: 30px; */
+	margin-right: 10px;
+	font-size: 15px;
+	border-radius: 50px;
+	outline: none;
+	padding-left: 7px;
+}
+.board_search_bar{
+	box-sizing: border-box;
+	display: flex;
+	/*border: 1px solid red;*/
+	border-radius: 50px;
+	width: 150px;
+	background-color: lightgray;
+}
+#input_search{
+	margin-left: 20px;
+	font-size: 18px;
+	outline: none;
+	border: none;
+	height: 40px;
+	width: 80%;
+	background-color: lightgray;
+}
+.search_i{
+	/*border: 1px solid blue;*/
+	width: 60px;
+	border-radius: 0 50px 50px 0;
+	font-size: 26px;
+	text-align: center;
+	line-height: 40px!important;
+	background-color: #FFB400;
+}
+.search_i > i{
+	line-height: 40px!important;
+}
+.search_i:hover{
+	background-color: darkorange;	
+	cursor: pointer;
+}
+
+.board_insert{
+	font-weight: 700;
+	height: 40px;
+	text-align: center;
+	background-color: #FFB400;
+	color: white;
+	width: 120px;
+	border-radius: 50px;
+	line-height: 40px;
+}
+.board_insert:hover{
+	background-color: darkorange;	
+	cursor: pointer;
+}
+.pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 5px;
+}
+.pagination a:hover:not(.active) {
+  background-color: #ddd;
+  border-radius: 5px;
+}

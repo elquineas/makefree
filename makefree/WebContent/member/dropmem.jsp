@@ -245,6 +245,10 @@
 		$(document).ready(function() {
 			var state = false;
 			
+			$('.btn_back').click(function(event) {
+				location.href = 'index.makefree';
+			});
+			
 			$('#input_pw').keyup(function(event) {
 				var id = "${sessionScope.loginUser.id}";
 				var pw = $('#input_pw').val();

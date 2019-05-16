@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="include/common.jsp" %>
+<%@ include file="../include/common.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -312,7 +312,7 @@
 				var id = "${sessionScope.loginUser.id}";
 				
 				if(pw != null || pw.length != 0){
-					ajaxPwCheck(id, pw);
+					currentPw = ajaxPwCheck(id, pw);
 				}
 				
 			});

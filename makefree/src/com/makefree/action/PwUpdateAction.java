@@ -12,7 +12,7 @@ public class PwUpdateAction implements Action{
 	@Override
 	public ActionForward excute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String url = "pwupdate.jsp";
+		String url = "member/pwupdate.jsp";
 		
 		HttpSession session = request.getSession();
 		
