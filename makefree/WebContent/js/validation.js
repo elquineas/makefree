@@ -182,30 +182,33 @@ var joinValidate = {
 //아이디 중복체크 Ajax
 
 function ajaxCheck(memId){
+	var return_val = ""; 
 	$.ajax({
 		//url:"idCheck.makefree?id="+id 라고 쓰는 것을 url과 data로 나누어서 사용
 		url:"idCheck.makefree",
 		type:"POST",
 		dataType:"json",
 		data:"id="+memId,
+		async: false,
 		success:function(data){
 			if(data.message == "-1"){
 				$(".err_msg").eq(0).text("* 이미 사용중인 아이디 입니다.")
 								   .css("color", "#ff1212");
 				$('.check_i').eq(0).css('color', '#ff1212');
-				return "-1";
+				return_val = "-1";
 			} else {
 				$('.err_msg').eq(0).css('display', 'inline-block')
 								   .css('color', 'mediumseagreen')
 								   .text('* 사용가능한 아이디 입니다.');
 				$('.check_i').eq(0).css('color', 'mediumseagreen');
-				return "1";
+				return_val = "1";
 			}
 		},
 		error:function(){
 			alert("System Error!!!");
 		}
 	});	
+	return return_val;
 }
 
 function ajaxPwCheck(id, pw){

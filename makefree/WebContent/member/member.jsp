@@ -452,7 +452,7 @@
 				var memId = $.trim(uid.val());
 				
 				var checkResult = joinValidate.checkId(memId);
-
+				
 				if(checkResult.code != 0){
 					$('.err_msg').eq(0).css('display', 'inline-block')
 									   .css('color', '#ff1212')
@@ -461,6 +461,7 @@
 					flag = 0;
 					return false;
 				} else {
+					
 					if(ajaxCheck(memId) == "1"){
 						flag = 1;
 						return true;

@@ -191,13 +191,19 @@
 		$(document).ready(function() {
 			$('#input_search').focus(function(event) {
 				$('.board_search_bar').css('width', '400px')
+									  .css('background-color', 'white')
 									  .css('transition', '.7s');
+				$('#input_search').css('background-color', 'white')
+				  				  .css('transition', '.7s');
 			});
 
 			$('#input_search').blur(function(event) {
-				$('.board_search_bar').css('width', '150px')
+				$('.board_search_bar').css('width', '120px')
+									  .css('background-color', '#f8f8f8')
 									  .css('transition', '.7s');
-				$('#input_search').val("");
+				$('#input_search').css('background-color', '#f8f8f8')
+								  .css('transition', '.7s')
+								  .val("");
 			});
 
 
