@@ -143,3 +143,20 @@ VALUES(seq_board.NEXTVAL, '테스트 페이지입니다.10', '안녕하세요', 
 COMMIT;
 SELECT * FROM tbl_board;
 
+
+-- 기존 데이터 복제해서 데이터 추가하기
+-- 더미로 300개 추가하기
+
+COMMIT;
+SELECT * FROM tbl_board;
+
+
+SELECT *
+FROM (SELECT rownum rnum, a.*
+      FROM (SELECT *
+            FROM tbl_board
+            WHERE bno > 0
+            ORDER BY bno DESC
+            ) a
+        )
+WHERE rnum BETWEEN 1 AND 10;
