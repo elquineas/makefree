@@ -142,3 +142,4 @@ VALUES(seq_board.NEXTVAL, '테스트 페이지입니다.10', '안녕하세요', 
 
 COMMIT;
 SELECT * FROM tbl_board;
+
