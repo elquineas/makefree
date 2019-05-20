@@ -13,6 +13,10 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 <title>Insert title here</title>
 <style type="text/css">
+.space_box{
+	width : 100%;
+	height: 170px;
+}
 .box2_2{
 	width: 100%;
 	height: 100%;
@@ -144,10 +148,24 @@
 			</div>
 		</div>	
 	</header>
+	<div class="space_box"></div>
 	
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
+		
+		$(window).scroll(function(event) {
+			var scrollValue = $(this).scrollTop();
+			if (scrollValue > 100) {
+				$('.header_body').css('margin-top', '-120px')
+								 .css('transition', '.5s');
+			} else {
+				$('.header_body').css('margin-top', '0px')
+								 .css('transition', '.5s');
+			}
+		});
+		
+		
 		$('.search_in').focus(function(event) {
 			$('.search_in').css('border', '1px solid blue');
 		});

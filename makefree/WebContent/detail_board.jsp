@@ -482,15 +482,6 @@ i.fa-heart {
 				$('#b_file').click();
 			});
 			
-			$(window).scroll(function(event) {
-				var scrollValue = $(this).scrollTop();
-				if (scrollValue > 350) {
-					$('#topBtn').fadeIn();
-				} else {
-					$('#topBtn').fadeOut();
-				}
-			});
-			
 			$('#btn_good').click(function(){
 				if($(this).hasClass('btn_unlike')) {
 					$(this).removeClass('btn_unlike');

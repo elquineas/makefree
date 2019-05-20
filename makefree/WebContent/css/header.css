@@ -7,6 +7,13 @@ header{
 	height: 170px;
 	/*border: 1px solid red;*/
 }
+.header_body{
+	z-index: 2;
+	position: fixed;
+	left: 0;
+	top:0;
+	background-color: white;
+}
 .header_space{
 	height: 40px;
 }
