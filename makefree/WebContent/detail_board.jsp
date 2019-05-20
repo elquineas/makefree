@@ -481,17 +481,15 @@ i.fa-heart {
 			$('.d_file_text').click(function(event) {
 				$('#b_file').click();
 			});
-			var goodbtn = 0;
-			/* $('.good_btn').click(function(event) {
-				if(goodbtn == 0){
-					$(this).css('color', 'red');
-					goodbtn = 1;
+			
+			$(window).scroll(function(event) {
+				var scrollValue = $(this).scrollTop();
+				if (scrollValue > 350) {
+					$('#topBtn').fadeIn();
 				} else {
-					$(this).css('color', 'lightgray');
-					goodbtn = 0;
+					$('#topBtn').fadeOut();
 				}
-				
-			}); */
+			});
 			
 			$('#btn_good').click(function(){
 				if($(this).hasClass('btn_unlike')) {
