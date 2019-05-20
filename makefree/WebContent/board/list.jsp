@@ -1,0 +1,205 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ include file="../include/header.jsp" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="${path}/css/board.css?v=1">
+
+<style type="text/css">
+	.box_wrap, .box1, .box2{
+		box-sizing:content-box;
+	}
+	pagination_i > i{
+		line-height: 15px!important;
+	}
+
+	.fas{
+		line-height: 1.5!important;
+	}
+	.container{
+		width: 500px;
+		margin: 0 auto;
+	}
+	.new_time{
+		background-color: #FF8224;
+		font-size: 11px;
+		color:white;
+		border-radius: 25px;
+		padding: 2px 5px;
+		animation-name:twinkle;
+		animation-duration:1.2s;
+		animation-iteration-count:infinite;
+	}
+	@keyframes twinkle{
+		0% {opacity:0;}
+		100% {opacity:1;}
+	}
+	.replyCnt_Color{
+		color : tomato;
+	}
+	.pagination {
+		font-size:15px;
+		display: inline-block;
+	}
+	.pagination a {
+	  color: black;
+	  float: left;
+	  padding: 5px 10px;
+	  text-decoration: none;
+	  text-align:center;
+	  transition: background-color .3s;
+	  border: 1px solid #ddd;
+	  height: 20px;
+	  width: 10px;
+	  line-height: 20px;
+	}
+	.pagination a.active {
+	  background-color: #B7F0B1;
+	  color: gray;
+	  border: 1px solid #B7F0B1;
+	  border-radius: 0px;
+	}
+	.pagination a:hover:not(.active) {
+		border-radius: 0px;
+		background-color: #ddd;
+	}
+
+</style>
+</head>
+<body>
+	<div class="all_wrap">
+		<div class="board_wrap">
+		
+			<div class="board_header">
+				<div class="board_title">
+					게시판 제목
+				</div>
+				<div class="board_array">
+					<div class="array_content">최신순</div>
+					<div class="array_content">추천순</div>
+					<div class="array_content">댓글순</div>
+					<div class="array_content">조회순</div>   
+				</div>
+			</div>
+
+			<div class="board_body">
+				<div class="content_title">
+					<div class="content_box board_content_num">NO.</div>
+					<div class="content_box board_content_title">제목</div>
+					<div class="content_box board_content_user">작성자</div>
+					<div class="content_box board_content_day">작성일</div>
+					<div class="content_box board_content_good">좋아요</div>
+					<div class="content_box board_content_view">조회수</div>
+					<div class="content_box board_content_file">첨부</div>
+				</div>
+				<c:forEach items="${list}" var="bDto">
+					<!-- 현재시간 구하기 -->
+					<jsp:useBean id="now" class="java.util.Date"/>
+					<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today"/>
+					<fmt:formatDate value="${bDto.regdate}" pattern="yyyy-MM-dd" var="regdate"/>
+					<div class="content_body">
+						<div class="content_box board_content_num">${bDto.bno}</div>
+						<div class="content_box board_content_title">${bDto.title}
+							<c:if test="${bDto.replycnt > 0}">
+								<span class="replyCnt_Color">( ${bDto.replycnt} )</span>
+							</c:if>
+							<c:if test="${today == regdate}">
+								<span class="new_time">New</span>
+							</c:if>
+						</div>
+						
+						<div class="content_box board_content_user">${bDto.writer}</div>
+						<div class="content_box board_content_day">
+							<c:choose>
+								<c:when test="${today == regdate}">
+									<fmt:formatDate pattern="hh:mm:ss" value="${bDto.regdate}" />
+								</c:when>
+								<c:otherwise>
+									<fmt:formatDate pattern="yyyy-MM-dd" value="${bDto.regdate}" />		
+								</c:otherwise>
+							</c:choose>			
+						</div>
+						<div class="content_box board_content_good"><i class="fas fa-heart"></i> ${bDto.goodcnt}</div>
+						<div class="content_box board_content_view"><i class="far fa-eye"></i> ${bDto.viewcnt}</div>
+						<div class="content_box board_content_file"></div>
+					</div>
+				</c:forEach>
+			</div>
+
+			<div class="board_footer">
+				<div class="border_page">
+					<div class="container">
+						<div class="pagination">
+							<c:if test="${pageMaker.prev}">
+								<a href="boardList.makefree?page=1" class="pagination_i"><i class="fas fa-angle-double-left"></i></a>
+						 		<a href="boardList.makefree?page=${pageMaker.startPage - 1}" class="pagination_i"><i class="fas fa-angle-left"></i></a>
+							</c:if>
+							
+							<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+								<a href="boardList.makefree?page=${idx}&flag=${flag}&keyword=${keyword}&key=${code}" <c:out value="${pageMaker.criDto.page == idx ? 'class=active':''}"/>>
+									${idx}
+								</a>
+							</c:forEach>
+							
+							<c:if test="${pageMaker.next}">
+								<a href="boardList.makefree?page=${pageMaker.endPage + 1}" class="pagination_i">
+									<i class="fas fa-angle-right"></i>
+								</a>
+								<a href="boardList.makefree?page=${pageMaker.finalPage}"  class="pagination_i">
+									<i class="fas fa-angle-double-right"></i>
+								</a>
+							</c:if>
+
+						</div>
+					</div>
+				</div>
+
+				<div class="board_footer_btn">
+					<div class="board_search">
+						<select name="select" id="selset_board">
+			                <option value="1">제목</option>          
+			                <option value="2">내용</option>
+			                <option value="3">제목+내용</option>
+			                <option value="3">작성자</option>
+			           </select>
+						<div class="board_search_bar">
+							<input type="text" name="" id="input_search" placeholder="검색">
+							<div class="search_i"><i class="fas fa-search"></i></div>
+						</div>
+					</div>
+					<div class="board_insert">게시글 등록</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#input_search').focus(function(event) {
+				$('.board_search_bar').css('width', '400px')
+									  .css('background-color', 'white')
+									  .css('transition', '.7s');
+				$('#input_search').css('background-color', 'white')
+				  				  .css('transition', '.7s');
+			});
+
+			$('#input_search').blur(function(event) {
+				$('.board_search_bar').css('width', '120px')
+									  .css('background-color', '#f8f8f8')
+									  .css('transition', '.7s');
+				$('#input_search').css('background-color', '#f8f8f8')
+								  .css('transition', '.7s')
+								  .val("");
+			});
+
+
+		});
+	</script>
+	<%@ include file="../include/footer.jsp" %>
+	
+</body>
+</html>

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.makefree.action.Action;
 import com.makefree.action.ActionForward;
+import com.makefree.action.BoardListAction;
 import com.makefree.action.ConstractAction;
 import com.makefree.action.DropMemberAction;
 import com.makefree.action.DropMemberPlayAction;
@@ -91,6 +92,9 @@ public class FrontController extends HttpServlet {
 			forward = action.excute(request, response);
 		} else if(command.contentEquals("/dropMemberPlay.makefree")) {
 			action = new DropMemberPlayAction();
+			forward = action.excute(request, response);
+		} else if(command.contentEquals("/boardList.makefree")) {
+			action = new BoardListAction();
 			forward = action.excute(request, response);
 		} 
 		

@@ -61,13 +61,29 @@
 		UPDATE tbl_member SET
 			pw = #{pw}
 		WHERE id = #{id}
-	
 	</update>
 	
 	<delete id="memDelete" parameterType="String">
-	DELETE FROM tbl_member
-	WHERE id=#{id}
-	
+		DELETE FROM tbl_member
+		WHERE id=#{id}
 	</delete>
 	
+	<select id="listAll" resultType="com.makefree.dto.BoardDTO">
+		SELECT *
+		FROM (SELECT rownum rnum, a.*
+		      FROM (SELECT *
+		            FROM tbl_board
+		            WHERE bno > 0
+		            ORDER BY bno DESC
+		            ) a
+		        )
+		WHERE rnum BETWEEN #{pageStart} AND ${perPageNum}
+	</select>
+	
+	<!-- 게시판 -->
+	<select id="totalCount" resultType="int">
+		SELECT Count(bno)
+		FROM tbl_board
+		WHERE bno > 0
+	</select>
 </mapper>

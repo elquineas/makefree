@@ -140,7 +140,7 @@
 				<div class="s_menu" id="menu1_btn">조리별</div>
 				<div class="s_menu">재료별</div>
 				<div class="s_menu">상황별</div>
-				<div class="s_menu">게시판</div>
+				<div class="s_menu" id="board_btn">게시판</div>
 			</div>
 		</div>	
 	</header>
@@ -259,7 +259,9 @@
 		$('#insert_btn').click(function(event) {
 			location.href ='constract.makefree';
 		});
-		
+		$('#board_btn').click(function(event) {
+			location.href ='boardList.makefree';
+		});
 		
 		
 		
@@ -273,6 +275,7 @@
 		$('#drop_mem').click(function(event) {
 			location.href ='dropMember.makefree';
 		});
+		
 		
 		
 	});
