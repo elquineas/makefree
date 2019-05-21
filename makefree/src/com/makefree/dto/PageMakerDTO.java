@@ -6,7 +6,7 @@ public class PageMakerDTO {
 	private int endPage;
 	private boolean prev;
 	private boolean next;
-	private int displayPageNum = 10;
+	private int displayPageNum = 10; //페이지에 10개만 띄움
 	private int finalPage;
 	private CriteriaDTO criDto;
 	public int getTotalCount() {

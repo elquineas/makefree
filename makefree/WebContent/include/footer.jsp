@@ -88,7 +88,7 @@
 		height: 40px;
 	}
 	.btn i{
-		line-height: 43px;
+		line-height: 40px;
 		transition: .2s linear;
 	}
 	.btn:hover i{

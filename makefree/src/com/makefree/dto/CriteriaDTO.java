@@ -4,8 +4,8 @@ public class CriteriaDTO {
 	private int page;
 	private int perPageNum;
 	private String keyword;
-	private String flag;
-	private String code;
+	private String search_option;
+	private String sort_type;
 	
 	public CriteriaDTO() {
 		//Defaule로 게시판 목록 출력시 1페이지에 10개의 게시물을 출력함.
@@ -13,14 +13,16 @@ public class CriteriaDTO {
 		this.perPageNum = 10;
 	}
 
-	public CriteriaDTO(int page, int perPageNum, String keyword, String flag, String code) {
+	public CriteriaDTO(int page, int perPageNum, String keyword, String search_option, String sort_type) {
 		super();
 		this.page = page;
 		this.perPageNum = perPageNum;
 		this.keyword = keyword;
-		this.flag = flag;
-		this.code = code;
+		this.search_option = search_option;
+		this.sort_type = sort_type;
 	}
+
+
 
 	public int getPage() {
 		return page;
@@ -56,26 +58,26 @@ public class CriteriaDTO {
 		this.keyword = keyword;
 	}
 
-	public String getFlag() {
-		return flag;
+	public String getSearch_option() {
+		return search_option;
 	}
 
-	public void setFlag(String flag) {
-		this.flag = flag;
+	public void setSearch_option(String search_option) {
+		this.search_option = search_option;
 	}
-
-	public String getCode() {
-		return code;
+	
+	public String getSort_type() {
+		return sort_type;
 	}
-
-	public void setCode(String code) {
-		this.code = code;
+	
+	public void setSort_type(String sort_type) {
+		this.sort_type = sort_type;
 	}
 
 	@Override
 	public String toString() {
-		return "CriteriaDTO [page=" + page + ", perPageNum=" + perPageNum + ", keyword=" + keyword + ", flag=" + flag
-				+ ", code=" + code + "]";
+		return "CriteriaDTO [page=" + page + ", perPageNum=" + perPageNum + ", keyword=" + keyword + ", search_option="
+				+ search_option + ", sort_type=" + sort_type + "]";
 	}
 
 	

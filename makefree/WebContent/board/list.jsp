@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="${path}/css/board.css?v=1">
+<link rel="stylesheet" href="${path}/css/list.css?v=1">
 
 <style type="text/css">
 	.box_wrap, .box1, .box2{
@@ -66,7 +66,15 @@
 		border-radius: 0px;
 		background-color: #ddd;
 	}
-
+	#search_result{
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		font-size: 14px;
+	}
+	.search_span{
+		color:tomato;
+	}
 </style>
 </head>
 <body>
@@ -78,11 +86,18 @@
 					게시판 제목
 				</div>
 				<div class="board_array">
-					<div class="array_content">최신순</div>
-					<div class="array_content">추천순</div>
-					<div class="array_content">댓글순</div>
-					<div class="array_content">조회순</div>   
+					<div class="array_content"><a href="${path}/boardList.makefree?sort_type=new&keyword=${keyword}&search_option=${search_option}" id="orderNew">최신순</a></div>
+					<div class="array_content"><a href="${path}/boardList.makefree?sort_type=good&keyword=${keyword}&search_option=${search_option}" id="orderGood">추천순</a></div>
+					<div class="array_content"><a href="${path}/boardList.makefree?sort_type=reply&keyword=${keyword}&search_option=${search_option}" id="orderReply">댓글순</a></div>
+					<div class="array_content"><a href="${path}/boardList.makefree?sort_type=view&keyword=${keyword}&search_option=${search_option}" id="orderCnt">조회순</a></div>   
 				</div>
+				
+				<c:if test="${!empty keyword}">
+					<div id = "search_result">
+						<span class="search_span">"${keyword}"</span>로 검색한 결과는
+						<span class="search_span">"${totalCount}"</span>건 입니다.
+					</div>
+				</c:if>
 			</div>
 
 			<div class="board_body">
@@ -134,21 +149,21 @@
 					<div class="container">
 						<div class="pagination">
 							<c:if test="${pageMaker.prev}">
-								<a href="boardList.makefree?page=1" class="pagination_i"><i class="fas fa-angle-double-left"></i></a>
-						 		<a href="boardList.makefree?page=${pageMaker.startPage - 1}" class="pagination_i"><i class="fas fa-angle-left"></i></a>
+								<a href="boardList.makefree?page=1&sort_type=${sort_type}&keyword=${keyword}&search_option=${search_option}" class="pagination_i"><i class="fas fa-angle-double-left"></i></a>
+						 		<a href="boardList.makefree?page=${pageMaker.startPage - 1}&sort_type=${sort_type}&keyword=${keyword}&search_option=${search_option}" class="pagination_i"><i class="fas fa-angle-left"></i></a>
 							</c:if>
 							
 							<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-								<a href="boardList.makefree?page=${idx}&flag=${flag}&keyword=${keyword}&key=${code}" <c:out value="${pageMaker.criDto.page == idx ? 'class=active':''}"/>>
+								<a href="boardList.makefree?page=${idx}&sort_type=${sort_type}&keyword=${keyword}&search_option=${search_option}" <c:out value="${pageMaker.criDto.page == idx ? 'class=active':''}"/>>
 									${idx}
 								</a>
 							</c:forEach>
 							
 							<c:if test="${pageMaker.next}">
-								<a href="boardList.makefree?page=${pageMaker.endPage + 1}" class="pagination_i">
+								<a href="boardList.makefree?page=${pageMaker.endPage + 1}&sort_type=${sort_type}&keyword=${keyword}&search_option=${search_option}" class="pagination_i">
 									<i class="fas fa-angle-right"></i>
 								</a>
-								<a href="boardList.makefree?page=${pageMaker.finalPage}"  class="pagination_i">
+								<a href="boardList.makefree?page=${pageMaker.finalPage}&sort_type=${sort_type}&keyword=${keyword}&search_option=${search_option}"  class="pagination_i">
 									<i class="fas fa-angle-double-right"></i>
 								</a>
 							</c:if>
@@ -159,11 +174,11 @@
 
 				<div class="board_footer_btn">
 					<div class="board_search">
-						<select name="select" id="selset_board">
-			                <option value="1">제목</option>          
-			                <option value="2">내용</option>
-			                <option value="3">제목+내용</option>
-			                <option value="3">작성자</option>
+						<select id="selset_board" name="selset_board">
+			                <option value="1" selected="selected">제목+내용</option>
+			                <option value="2">제목</option>          
+			                <option value="3">내용</option>
+			                <option value="4">작성자</option>
 			           </select>
 						<div class="board_search_bar">
 							<input type="text" name="" id="input_search" placeholder="검색">
@@ -179,7 +194,32 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$('#input_search').focus(function(event) {
+			var sort_type = "${sort_type}";
+			$('.array_content > a').css("color", "black").css("font-weight", "400");
+			if(sort_type == "new"){
+				$('#orderNew').css("color", "red").css("font-weith", "700");
+			} else if(sort_type == "good"){
+				$('#orderGood').css("color", "red").css("font-weith", "700");
+			} else if(sort_type == "reply"){
+				$('#orderReply').css("color", "red").css("font-weith", "700");
+			} else if(sort_type == "view"){
+				$('#orderCnt').css("color", "red").css("font-weith", "700");
+			}
+			
+			$('.search_i').click(function(event) {
+				var search_option = $('#selset_board').val();
+				var keyword = $.trim($('#input_search').val());
+				/* alert(search_option + ", " + keyword); */
+				
+				if(keyword == null || keyword.length == 0){
+					$('#input_search').focus();
+					return false;
+				}
+				location.href="${path}/boardList.makefree?search_option="+search_option+"&keyword="+keyword;
+			});
+			
+			
+/* 			$('#input_search').focus(function(event) {
 				$('.board_search_bar').css('width', '400px')
 									  .css('background-color', 'white')
 									  .css('transition', '.7s');
@@ -194,7 +234,7 @@
 				$('#input_search').css('background-color', '#f8f8f8')
 								  .css('transition', '.7s')
 								  .val("");
-			});
+			}); */
 
 
 		});
