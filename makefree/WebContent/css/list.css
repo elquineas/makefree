@@ -102,8 +102,13 @@ body{
 
 .content_body{
 	display: flex;
-	
 }
+.view_link{
+	color:black;
+}
+/* .board_body:nth-child(odd){
+	background-color: #FFFFE4;
+} */
 .content_body:nth-child(odd){
 	background-color: #FFFFE4;
 }
@@ -116,7 +121,6 @@ body{
 }
 .content_body:hover{
 	background-color: #FFE08C; 
-	cursor: pointer;
 }
 
 

@@ -75,6 +75,9 @@
 	.search_span{
 		color:tomato;
 	}
+	.board_content_title > a{
+		color : black;
+	}
 </style>
 </head>
 <body>
@@ -98,6 +101,7 @@
 						<span class="search_span">"${totalCount}"</span>건 입니다.
 					</div>
 				</c:if>
+
 			</div>
 
 			<div class="board_body">
@@ -117,7 +121,10 @@
 					<fmt:formatDate value="${bDto.regdate}" pattern="yyyy-MM-dd" var="regdate"/>
 					<div class="content_body">
 						<div class="content_box board_content_num">${bDto.bno}</div>
-						<div class="content_box board_content_title">${bDto.title}
+						<div class="content_box board_content_title">
+							<a class="view_link" href="${path}/boardView.makefree?bno=${bDto.bno}">
+								${bDto.title}
+							</a>
 							<c:if test="${bDto.replycnt > 0}">
 								<span class="replyCnt_Color">( ${bDto.replycnt} )</span>
 							</c:if>
@@ -125,6 +132,7 @@
 								<span class="new_time">New</span>
 							</c:if>
 						</div>
+						
 						
 						<div class="content_box board_content_user">${bDto.writer}</div>
 						<div class="content_box board_content_day">
@@ -193,7 +201,8 @@
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript">
-		$(document).ready(function() {
+		$(document).ready(function() {			
+			
 			var sort_type = "${sort_type}";
 			$('.array_content > a').css("color", "black").css("font-weight", "400");
 			if(sort_type == "new"){

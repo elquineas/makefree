@@ -124,4 +124,25 @@
         	AND writer LIKE '%' || #{keyword} || '%'
         </if>
 	</select>
+	
+	<select id="view" parameterType="String" resultType="com.makefree.dto.BoardDTO">
+		SELECT * FROM tbl_board
+		WHERE bno = #{bno}
+	</select>
+	
+	
+	<update id="viewCnt" parameterType="String">
+		UPDATE tbl_board
+		   SET viewcnt= viewcnt + 1
+		 WHERE bno = #{bno}
+	</update>
+	
+	
+	<select id="replyList" parameterType="String" resultType="com.makefree.dto.ReplyDTO">
+		SELECT * FROM tbl_reply
+		WHERE bno = #{bno}
+	</select>
+	
+	
+	
 </mapper>

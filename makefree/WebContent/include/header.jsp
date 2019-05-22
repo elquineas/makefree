@@ -31,6 +31,7 @@
 .box2_2:hover{
 	background-color: #FFBB00;
 }
+
 </style>
 
 </head>

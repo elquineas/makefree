@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="include/header.jsp" %>
+<%@ include file="../include/header.jsp" %>
+<%
+	String referer = request.getHeader("referer");
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,6 +38,13 @@ body{
 	box-shadow: 0 10px 20px -10px rgba(0,0,0,0.5);
 	border-radius:20px;
 }
+.board_insert_box input{
+	font-size: 15px;
+	padding-left: 10px;
+}
+.date_box{
+	padding-left: 10px;
+}
 .board_insert_header{
 	width: 100%;
 	height: 160px;
@@ -52,21 +63,35 @@ body{
 	justify-content: space-between;
 	/* border:1px solid black; */
 }
+.gv_box{
+	position: absolute;
+	right: 20px;
+	letter-spacing : 0;
+}
+.good_i{
+	color:red;
+}
+.view_i{
+	margin-left:3px;
+	margin-right:2px;
+	color: #B2CCFF;
+}
 .content_infobox{
 	margin-top:-2px;
 	width: 259px;
 	font-size:15px;
 	line-height:35px;
 	border:1px solid white;
-	text-align: center;
+	letter-spacing : -1px;
 }
 .content_namebox{
+	box-sizing:border-box;
 	margin-top:-2px;
 	width: 632px;
 	font-size:15px;
 	line-height:35px;
 	border:1px solid white;
-	text-align: center;
+	padding-left:8px;
 }
 .content_name{
 	font-weight: 700;
@@ -112,10 +137,19 @@ body{
 .board_textarea{
 	height: 200px;
 	width: 100%;
-
 }
+.board_textbox{
+	height: 200px;
+	width: 100%;
+	border: 1px solid lightgray;
+	box-sizing: border-box;
+	padding: 10px;
+}
+
 .board_insert_footer{
 	position: relative;
+	display: flex;
+	justify-content: space-between;
 }
 .b_i_btn{
 	height: 35px;
@@ -123,14 +157,21 @@ body{
 	border-radius: 10px;
 	line-height: 35px;
 	font-size:15px;
-	background-color: white;
 	text-align: center;
+	background-color: #FFE08C;
+}
+.b_update_btn{
+	margin-right:10px;
 }
 .b_back_btn{
 	background-color: #FFE08C;
 }
-.b_back_btn:hover{
+.board_ud_box{
+	display: flex;
+}
+.b_i_btn:hover{
 	background-color: orange;
+	cursor: pointer;
 }
 .comment_wrap{
 	box-sizing: border-box;
@@ -367,18 +408,19 @@ i.fa-heart {
 					<div class="content_wrap">
 						<span class="content_name">작성자</span>
 						<span class="content_infobox">
-							<input type="text" name="" id="user_name" class="read_info" readonly="readonly">
+							<input type="text" name="" id="user_name" class="read_info" readonly="readonly" value="${one.writer}">
 						</span>
 						<span class="content_name read_time">작성일자</span>
-						<span class="content_infobox">
-							<input type="text" name="" id="update_time" class="read_info" readonly="readonly">
+						<span class="content_infobox date_box">
+							<fmt:formatDate pattern="yyyy-MM-dd" value="${one.regdate}" />	
 						</span>
 					</div>
 					<div class="content_wrap">
 						<span class="content_name">제목</span>
 						<span class="content_namebox">
-							<input type="text" name="" class="read_info" readonly="readonly">
+							${one.title}
 						</span>
+						
 					</div>
 					<div class="content_wrap">
 						<span class="content_name">첨부파일</span>
@@ -386,12 +428,16 @@ i.fa-heart {
 						<div class="d_file_text"><i class="fas fa-file-upload"></i>
 							<span> 첨부된 파일이 없습니다.</span>
 						</div>
+						<div class="gv_box">
+							<i class="fas fa-heart good_i"></i>${one.goodcnt}
+							<i class="far fa-eye view_i"></i>${one.viewcnt}
+						</div>
 					</div>
 				</div>
 				
 				<div class="board_insert_body">
 					<div class="board_name">내용</div>
-					<textarea class="board_textarea"></textarea>
+					<div class="board_textbox">${one.content}</div>
 				</div>
 				
 				<div class="board_insert_footer">
@@ -404,82 +450,43 @@ i.fa-heart {
 							</button>
 						</div>
 					</div>
+					<div class="board_ud_box">
+						<c:if test="${sessionScope.loginUser.id == one.writer}">
+							<div class="b_i_btn b_update_btn">수정하기</div>
+							<div class="b_i_btn b_delete_btn">삭제하기</div>
+						</c:if>
+					</div>
 				</div>
 				
 			</div>
 		</div>
 		<div class="comment_wrap">
-			<div class="comment_box">
-				<div class="comment_header">댓글</div>
-				<div id="box_solid"></div>
-				
-				<c:choose>
-					<c:when test="${empty sessionScope.loginUser}">
-						<div class="comment_list">
-							<div class="comment_list_wrap">
-								<div class="comment_main">
-									<div class="board_info">
-										<span id="uname">user01</span>
-										<span id="btime">2019-05-17</span>
-									</div>
-									<div class="comment_text">
-										안녕하세요.
-									</div>
-								</div>
-							</div>
-							
-							<div class="comment_list_wrap">
-								<div class="comment_main">
-									<div class="board_info">
-										<span id="uname">user02</span>
-										<span id="btime">2019-05-17</span>
-									</div>
-									<div class="comment_text">
-										반갑습니다.
-									</div>
-								</div>
-							</div>
-						</div>
-					</c:when>
-					
-					<c:otherwise>
-						<div class="comment_list">
-							<div class="comment_list_wrap">
-								<div class="comment_main2">
-									<div class="board_info">
-										<span id="uname">댓글이 없습니다.</span>
-										<span id="btime"></span>
-									</div>
-									<div class="comment_text">
-									</div>
-								</div>
-							</div>
-						</div>
-					</c:otherwise>
-				</c:choose>
-				
-				
-					
-				
-				<div id="box_dashed"></div>
-				<div class="comment_write">
-					<div class="write_title">유저ID</div>
-					<div class="write_box">
-						<textarea class="board_textarea">내용</textarea>
-					</div>
-				</div>
-				<div class="comment_footer">
-					<div class="b_i_btn b_back_btn">목록으로</div>
-					<div class="b_i_btn b_write_btn">작성</div>
-				</div>
-			</div>
+			<div id="commentList"></div>
 		</div>
 	</div> 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
+			/*문서가 준비되면 댓글 목록을 조회하는 AJAX 실행 */
+			comment_list();
+			
+			function comment_list(){
+				$.ajax({
+					type:"POST",
+					url: "commentlist.makefree",
+					data: "bno=${one.bno}",
+					success:function(result){
+						$("#commentList").html(result);
+					}
+				});
+			}
+			
 			$('.d_file_text').click(function(event) {
 				$('#b_file').click();
+			});
+			
+			$('.b_back_btn').click(function(){
+				location.href = "<%=referer%>";
 			});
 			
 			$('#btn_good').click(function(){
