@@ -160,3 +160,44 @@ FROM (SELECT rownum rnum, a.*
             ) a
         )
 WHERE rnum BETWEEN 1 AND 10;
+
+
+
+
+-- makefree 댓글 테이블
+
+DROP SEQUENCE seq_reply;
+CREATE SEQUENCE seq_reply
+START WITH 1
+INCREMENT BY 1;
+
+DROP TABLE tbl_reply;
+CREATE TABLE tbl_reply(
+    rno NUMBER PRIMARY KEY,
+    content VARCHAR2(2000) NOT NULL,
+    writer VARCHAR2(30) NOT NULL,
+    regdate DATE DEFAULT SYSDATE,
+    bno NUMBER NOT NULL
+);
+
+ALTER TABLE tbl_reply
+ADD CONSTRAINT tbl_reply_fk_bno
+FOREIGN KEY(bno) REFERENCES tbl_board(bno);
+commit;
+
+INSERT INTO tbl_reply(rno, content, writer, bno)
+VALUES(seq_reply.NEXTVAL, '안녕하세요1', 'user01', '9');
+INSERT INTO tbl_reply(rno, content, writer, bno)
+VALUES(seq_reply.NEXTVAL, '안녕하세요2', 'user01', '10');
+INSERT INTO tbl_reply(rno, content, writer, bno)
+VALUES(seq_reply.NEXTVAL, '안녕하세요3', 'user02', '9');
+INSERT INTO tbl_reply(rno, content, writer, bno)
+VALUES(seq_reply.NEXTVAL, '안녕하세요4', 'user02', '10');
+INSERT INTO tbl_reply(rno, content, writer, bno)
+VALUES(seq_reply.NEXTVAL, '안녕하세요5', 'user03', '9');
+INSERT INTO tbl_reply(rno, content, writer, bno)
+VALUES(seq_reply.NEXTVAL, '안녕하세요6', 'user03', '10');
+
+commit;
+SELECT*FROM tbl_reply;
+
