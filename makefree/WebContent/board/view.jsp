@@ -10,6 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <title>상세 게시글</title>
+<script type="text/javascript" src="${path}/smarteditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 <style type="text/css">
 *{
 	margin: 0;
@@ -135,8 +136,8 @@ body{
 	color:#BDBDBD;
 }
 .board_textarea{
-	height: 200px;
-	width: 100%;
+	height: 100px;
+	width: 99.5%;
 }
 .board_textbox{
 	height: 200px;
@@ -242,6 +243,7 @@ body{
 	background-color: orange;
 }
 .comment_list_wrap{
+	position:relative;
 	margin:30px 30px 0px;
 	padding : 10px;
 	height: 130px;
@@ -251,6 +253,8 @@ body{
 	display: flex;
 	justify-content: space-between;
 }
+
+
 
 .comment_main{
 	width: 100%;
@@ -278,14 +282,15 @@ body{
 .board_info > span{
 	margin: 0 10px;
 }
-#uname{
+.uname{
 	font-weight: 700;
 }
-#btime{
+.btime{
 	font-weight: 200;
 	font-size: 15px;
 }
 .comment_text{
+	position:relative;
 	box-sizing:border-box;
 	font-size: 15px;
 	height: 70px;
@@ -442,14 +447,18 @@ i.fa-heart {
 				
 				<div class="board_insert_footer">
 					<div class="b_i_btn b_back_btn">목록으로</div>
-					<div class="good_btn">
-						<div id="wrap_like">
-							<button type="button" class="btn_like" id="btn_good">
-								<span class="img_emoti">좋아요</span>
-								<span class="ani_heart_m"></span>
-							</button>
+					
+					<c:if test="${!empty sessionScope.loginUser}">
+						<div class="good_btn">
+							<div id="wrap_like">
+								<button type="button" class="btn_like" id="btn_good">
+									<span class="img_emoti">좋아요</span>
+									<span class="ani_heart_m"></span>
+								</button>
+							</div>
 						</div>
-					</div>
+					</c:if>
+					
 					<div class="board_ud_box">
 						<c:if test="${sessionScope.loginUser.id == one.writer}">
 							<div class="b_i_btn b_update_btn">수정하기</div>
@@ -469,17 +478,38 @@ i.fa-heart {
 		$(document).ready(function() {
 			/*문서가 준비되면 댓글 목록을 조회하는 AJAX 실행 */
 			comment_list();
+
 			
-			function comment_list(){
-				$.ajax({
-					type:"POST",
-					url: "commentlist.makefree",
-					data: "bno=${one.bno}",
-					success:function(result){
-						$("#commentList").html(result);
-					}
-				});
-			}
+			$(document).on("click", ".b_write_btn", function(event){
+				oEditors.getById["replyInsert"].
+				exec("UPDATE_CONTENTS_FIELD", []);
+				var content = $("#replyInsert").val();
+				
+				if(content == "<p><br></p>"){
+					//유효성체크(Null 체크)
+					$("#replyInsert").focus();
+					return false;
+				}else{
+					//게시글번호 담아서
+					var bno = '${one.bno}';
+					$('#re_bno').val(bno);
+					
+					/* serialize직렬화 시켜서 전송, 데이터를 바이트화 시켜서 전송 */
+					$.ajax({
+						type:"POST",
+						url: "replyAdd.makefree",
+						data: $('#frm_reply').serialize(), 
+						contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+						success:function(result){
+							comment_list();
+							$("#replyInsert").val("");
+						},
+						error: function(){
+							alert("System Error!!!")
+						}
+					});
+				}
+			});
 			
 			$('.d_file_text').click(function(event) {
 				$('#b_file').click();
@@ -490,7 +520,10 @@ i.fa-heart {
 			});
 			
 			$('#btn_good').click(function(){
-				if($(this).hasClass('btn_unlike')) {
+				var bno = '${one.bno}';
+ 				var id = '${sessionScope.loginUser.id}';
+ 				
+ 				if($(this).hasClass('btn_unlike')) {
 					$(this).removeClass('btn_unlike');
 					$('.ani_heart_m').removeClass('hi');
 					$('.ani_heart_m').addClass('bye');
@@ -500,11 +533,50 @@ i.fa-heart {
 					$('.ani_heart_m').addClass('hi');
 					$('.ani_heart_m').removeClass('bye');
 				}
+ 				
+ 				$.ajax({
+					type:"POST",
+					url: "goodAdd.makefree",
+					data: "bno=" + bno + "&id=" + id, 
+					success:function(result){
+						
+						
+					},
+					error: function(){
+						alert("System Error!!!")
+					} 
+				});
+				
 			});
-			
-			
-
 		});
+		
+		$(document).on("click", ".delete_comment", function(event){
+			var rno = $(this).attr("data_num");
+			var bno = ${one.bno};
+			
+			$.ajax({
+				type:"POST",
+				url: "replyRemove.makefree",
+				data: "rno=" + rno + "&bno=" + bno, 
+				success:function(result){
+					comment_list();
+				},
+				error: function(){
+					alert("System Error!!!")
+				}
+			});
+		});
+		
+		function comment_list(){
+			$.ajax({
+				type:"POST",
+				url: "commentlist.makefree",
+				data: "bno=${one.bno}",
+				success:function(result){
+					$("#commentList").html(result);
+				}
+			});
+		}
 	</script>
 </body>
 </html>

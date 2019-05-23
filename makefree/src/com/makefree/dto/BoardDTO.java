@@ -18,6 +18,12 @@ public class BoardDTO {
 		
 	}
 	
+	public BoardDTO(String bno, String writer) {
+		super();
+		this.bno = bno;
+		this.writer = writer;
+	}
+	
 	public BoardDTO(String bno, String title, String content, String writer, Date regdate, int viewcnt, int replycnt,
 			int goodcnt, String filename, int filesize) {
 		super();

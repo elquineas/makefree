@@ -17,6 +17,7 @@ import com.makefree.action.CommentListAction;
 import com.makefree.action.ConstractAction;
 import com.makefree.action.DropMemberAction;
 import com.makefree.action.DropMemberPlayAction;
+import com.makefree.action.GoodAddAction;
 import com.makefree.action.IdCheckAction;
 import com.makefree.action.IndexAction;
 import com.makefree.action.InfoUpdateAction;
@@ -28,6 +29,8 @@ import com.makefree.action.MemberAction;
 import com.makefree.action.PwCheckAction;
 import com.makefree.action.PwUpdateAction;
 import com.makefree.action.PwUpdatePlayAction;
+import com.makefree.action.ReplyAddAction;
+import com.makefree.action.ReplyRemoveAction;
 import com.makefree.action.memberPlayAction;
 
 @WebServlet("/FrontController")
@@ -104,9 +107,16 @@ public class FrontController extends HttpServlet {
 		} else if(command.contentEquals("/commentlist.makefree")) {
 			action = new CommentListAction();
 			forward = action.excute(request, response);
-		} 
-		
-		
+		} else if(command.contentEquals("/replyAdd.makefree")) {
+			action = new ReplyAddAction();
+			forward = action.excute(request, response);
+		} else if(command.contentEquals("/goodAdd.makefree")) {
+			action = new GoodAddAction();
+			forward = action.excute(request, response);
+		} else if(command.contentEquals("/replyRemove.makefree")) {
+			action = new ReplyRemoveAction();
+			forward = action.excute(request, response);
+		} 	
 		
 		
 		

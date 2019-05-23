@@ -159,12 +159,22 @@
 			var scrollValue = $(this).scrollTop();
 			if (scrollValue > 100) {
 				$('.header_body').css('margin-top', '-120px')
-								 .css('transition', '.5s');
+								 .css('transition', '.5s');			
 			} else {
 				$('.header_body').css('margin-top', '0px')
 								 .css('transition', '.5s');
 			}
 		});
+		
+ 		$('.header_body').hover(function(event) {
+			$('.header_body').css('margin-top', '0px')
+							 .css('transition', '.5s');
+		});
+		/*
+		$('.header_body').mouseleave(function(event) {
+			$('.header_body').css('margin-top', '-120px')
+							 .css('transition', '.5s');
+		}); */
 		
 		
 		$('.search_in').focus(function(event) {
@@ -294,6 +304,8 @@
 		$('#drop_mem').click(function(event) {
 			location.href ='dropMember.makefree';
 		});
+		
+		
 		
 		
 		

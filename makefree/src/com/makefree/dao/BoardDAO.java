@@ -1,5 +1,6 @@
 package com.makefree.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -9,6 +10,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 
 import com.makefree.dto.BoardDTO;
 import com.makefree.dto.CriteriaDTO;
+import com.makefree.dto.ReplyDTO;
 import com.makefree.mybatis.SqlMapConfig;
 
 public class BoardDAO {
@@ -112,7 +114,49 @@ public class BoardDAO {
 		}
 	}
 	
+	public int goodAdd(String bno, String id) {
+		sqlSession = sqlSessionFactory.openSession(true);
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		
+		map.put("bno", bno);
+		map.put("id", id);
+		
+		try {
+			result = sqlSession.insert("goodAdd", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
+		}
+		
+		return result;
+	}
 	
+	public void replyCntAdd(int bno) {
+		sqlSession = sqlSessionFactory.openSession(true);
+		
+		try {
+			result = sqlSession.update("replyCntAdd", bno);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
+		}
+	}
+	
+	public int replyCntMinus(int bno) {
+		sqlSession = sqlSessionFactory.openSession(true);
+		
+		try {
+			result = sqlSession.update("replyCntMinus", bno);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
+		}
+		return result;
+	}
 	
 	
 	
