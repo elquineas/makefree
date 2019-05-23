@@ -132,6 +132,69 @@ public class BoardDAO {
 		
 		return result;
 	}
+	public int goodDel(String bno, String id) {
+		sqlSession = sqlSessionFactory.openSession(true);
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		
+		map.put("bno", bno);
+		map.put("id", id);
+		
+		try {
+			result = sqlSession.delete("goodDel", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
+		}
+		
+		return result;
+	}
+	
+	public int goodCheck(String bno, String id) {
+		sqlSession = sqlSessionFactory.openSession(true);
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		
+		map.put("bno", bno);
+		map.put("id", id);
+		
+		try {
+			result = sqlSession.selectOne("goodCheck", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
+		}
+		return result;
+	}
+	public int goodCheckAll(int bno) {
+		sqlSession = sqlSessionFactory.openSession(true);
+
+		try {
+			result = sqlSession.selectOne("goodCheckAll", bno);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
+		}
+		return result;
+	}
+	public int goodCntpm(HashMap<String, String> map) {
+		sqlSession = sqlSessionFactory.openSession(true);
+		
+		try {
+			result = sqlSession.update("goodCntpm", map);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
+		}
+		return result;
+	}
+	
+	
 	
 	public void replyCntAdd(int bno) {
 		sqlSession = sqlSessionFactory.openSession(true);

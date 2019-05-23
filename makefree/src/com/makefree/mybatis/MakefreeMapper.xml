@@ -152,6 +152,27 @@
 		INSERT INTO tbl_good(gno, id, bno)
 		VALUES(seq_good.NEXTVAL, #{id}, #{bno})
 	</insert>
+	<delete id="goodDel" parameterType="hashmap">
+		DELETE FROM tbl_good
+		WHERE bno = #{bno} AND id = #{id}
+	</delete>
+	
+	<select id="goodCheck" parameterType="hashmap" resultType="int">
+		SELECT COUNT(*) FROM tbl_good
+		WHERE bno = #{bno} AND id = #{id}
+	</select>
+	
+	<select id="goodCheckAll" parameterType="hashmap" resultType="int">
+		SELECT COUNT(*) FROM tbl_good
+		WHERE bno = #{bno}
+	</select>
+	
+	<update id="goodCntpm" parameterType="hashmap">
+		UPDATE tbl_board
+		   SET goodcnt = #{goodcnt}
+		 WHERE bno = #{bno}
+	</update>
+
 	
 	<delete id="replyRemove" parameterType="int">
 		DELETE FROM tbl_reply

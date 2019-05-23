@@ -434,8 +434,8 @@ i.fa-heart {
 							<span> 첨부된 파일이 없습니다.</span>
 						</div>
 						<div class="gv_box">
-							<i class="fas fa-heart good_i"></i>${one.goodcnt}
-							<i class="far fa-eye view_i"></i>${one.viewcnt}
+							<i class="fas fa-heart good_i"></i><span id="goodcnt">${one.goodcnt}</span>
+							<i class="far fa-eye view_i"></i><span id="viewcnt">${one.viewcnt}</span>
 						</div>
 					</div>
 				</div>
@@ -478,7 +478,7 @@ i.fa-heart {
 		$(document).ready(function() {
 			/*문서가 준비되면 댓글 목록을 조회하는 AJAX 실행 */
 			comment_list();
-
+			good_check();
 			
 			$(document).on("click", ".b_write_btn", function(event){
 				oEditors.getById["replyInsert"].
@@ -523,23 +523,22 @@ i.fa-heart {
 				var bno = '${one.bno}';
  				var id = '${sessionScope.loginUser.id}';
  				
- 				if($(this).hasClass('btn_unlike')) {
-					$(this).removeClass('btn_unlike');
-					$('.ani_heart_m').removeClass('hi');
-					$('.ani_heart_m').addClass('bye');
-				}
-				else {
-					$(this).addClass('btn_unlike');
-					$('.ani_heart_m').addClass('hi');
-					$('.ani_heart_m').removeClass('bye');
-				}
- 				
  				$.ajax({
 					type:"POST",
 					url: "goodAdd.makefree",
 					data: "bno=" + bno + "&id=" + id, 
-					success:function(result){
-						
+					dataType: "json",
+					success:function(data){
+						if(data.check == "0"){
+							$('#btn_good').addClass('btn_unlike');
+							$('.ani_heart_m').addClass('hi');
+							$('.ani_heart_m').removeClass('bye');
+						}else {
+							$('#btn_good').removeClass('btn_unlike');
+							$('.ani_heart_m').removeClass('hi');
+							$('.ani_heart_m').addClass('bye');
+						}
+						$('#goodcnt').text(data.goodcnt);
 						
 					},
 					error: function(){
@@ -552,7 +551,7 @@ i.fa-heart {
 		
 		$(document).on("click", ".delete_comment", function(event){
 			var rno = $(this).attr("data_num");
-			var bno = ${one.bno};
+			var bno = '${one.bno}';
 			
 			$.ajax({
 				type:"POST",
@@ -566,6 +565,24 @@ i.fa-heart {
 				}
 			});
 		});
+		
+		function good_check(){
+			var bno = '${one.bno}';
+			var id = '${sessionScope.loginUser.id}';
+			$.ajax({
+				type:"POST",
+				url: "good_check.makefree",
+				data: "bno="+bno+"&id="+id,
+				success:function(data){
+					
+					if(data.check == "0"){
+						$('#btn_good').removeClass('btn_unlike');			
+					}else {
+						$('#btn_good').addClass('btn_unlike');
+					}
+				}
+			});
+		}
 		
 		function comment_list(){
 			$.ajax({

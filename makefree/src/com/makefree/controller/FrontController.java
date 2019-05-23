@@ -18,6 +18,7 @@ import com.makefree.action.ConstractAction;
 import com.makefree.action.DropMemberAction;
 import com.makefree.action.DropMemberPlayAction;
 import com.makefree.action.GoodAddAction;
+import com.makefree.action.Good_CheckAction;
 import com.makefree.action.IdCheckAction;
 import com.makefree.action.IndexAction;
 import com.makefree.action.InfoUpdateAction;
@@ -116,7 +117,10 @@ public class FrontController extends HttpServlet {
 		} else if(command.contentEquals("/replyRemove.makefree")) {
 			action = new ReplyRemoveAction();
 			forward = action.excute(request, response);
-		} 	
+		} else if(command.contentEquals("/good_check.makefree")) {
+			action = new Good_CheckAction();
+			forward = action.excute(request, response);
+		} 
 		
 		
 		
