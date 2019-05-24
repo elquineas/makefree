@@ -15,6 +15,7 @@ import com.makefree.action.BoardListAction;
 import com.makefree.action.BoardViewAction;
 import com.makefree.action.CommentListAction;
 import com.makefree.action.ConstractAction;
+import com.makefree.action.DeleteBoardAction;
 import com.makefree.action.DropMemberAction;
 import com.makefree.action.DropMemberPlayAction;
 import com.makefree.action.GoodAddAction;
@@ -23,6 +24,7 @@ import com.makefree.action.IdCheckAction;
 import com.makefree.action.IndexAction;
 import com.makefree.action.InfoUpdateAction;
 import com.makefree.action.InfoUpdatePlayAction;
+import com.makefree.action.InsertBoardAction;
 import com.makefree.action.LoginAjaxAction;
 import com.makefree.action.LoginOutAction;
 import com.makefree.action.LogoutAjaxAction;
@@ -30,6 +32,8 @@ import com.makefree.action.MemberAction;
 import com.makefree.action.PwCheckAction;
 import com.makefree.action.PwUpdateAction;
 import com.makefree.action.PwUpdatePlayAction;
+import com.makefree.action.RegisterAjaxAction;
+import com.makefree.action.RegisterViewAction;
 import com.makefree.action.ReplyAddAction;
 import com.makefree.action.ReplyRemoveAction;
 import com.makefree.action.memberPlayAction;
@@ -120,8 +124,19 @@ public class FrontController extends HttpServlet {
 		} else if(command.contentEquals("/good_check.makefree")) {
 			action = new Good_CheckAction();
 			forward = action.excute(request, response);
+		} else if(command.contentEquals("/registerAjax.makefree")) {
+			action = new RegisterAjaxAction();
+			forward = action.excute(request, response);
+		} else if(command.contentEquals("/registerView.makefree")) {
+			action = new RegisterViewAction();
+			forward = action.excute(request, response);
+		} else if(command.contentEquals("/insertBoard.makefree")) {
+			action = new InsertBoardAction();
+			forward = action.excute(request, response);
+		} else if(command.contentEquals("/deleteBoard.makefree")) {
+			action = new DeleteBoardAction();
+			forward = action.excute(request, response);
 		} 
-		
 		
 		
 		

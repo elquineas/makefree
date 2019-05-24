@@ -131,6 +131,7 @@ body{
 	line-height:28px;
 	color:#BDBDBD;
 }
+
 .d_file_text > i {
 	margin-right:10px;
 	color:#BDBDBD;
@@ -398,6 +399,63 @@ i.fa-heart {
 	padding-right: 5px;
 }
 
+	.modal_deleteback{
+		display: none;
+		position: fixed;
+		top: 0;
+		left: 0;
+		width:100vw;
+		height:100vh;
+		background-color: rgba(0,0,0,0.6);
+	}
+	.modal_deletebox{
+		border-radius: 30px;
+		margin: 200px auto 0;
+		width: 400px;
+		height: 300px;
+		background-color: white;
+	}
+	.modal_deleteheader{
+		height: 70px;
+		width: 100%;
+		/*border: 1px solid gray;*/
+		font-size: 40px;
+		line-height: 70px;
+		text-align: center;
+	}
+	.point{
+		color: orange;
+	}
+	.modal_deletebody{
+		width: 100%;
+		height: 150px;
+		text-align: center;
+		font-size: 20px;
+		line-height: 150px;
+	}
+	.re_ox_btn{
+		display: flex;
+		height: 50px;
+		/*border: 1px solid gray;*/
+		justify-content: space-around;
+	}
+	.drop_btn {
+		width: 150px;
+		text-align:center;
+		font-size: 20px;
+		line-height:50px;
+		cursor: pointer;
+		background-color: lightgray;
+	}
+	.drop_btn:hover {
+		background-color: #FFB400;
+	}
+	.content_num{
+		margin-right:5px;
+		color:tomato;
+		font-size: 12px;
+	}
+
 
 </style>
 </head>
@@ -424,6 +482,7 @@ i.fa-heart {
 						<span class="content_name">제목</span>
 						<span class="content_namebox">
 							${one.title}
+							
 						</span>
 						
 					</div>
@@ -434,6 +493,9 @@ i.fa-heart {
 							<span> 첨부된 파일이 없습니다.</span>
 						</div>
 						<div class="gv_box">
+							<span class="content_num">
+								${one.bno} 번째글
+							</span>
 							<i class="fas fa-heart good_i"></i><span id="goodcnt">${one.goodcnt}</span>
 							<i class="far fa-eye view_i"></i><span id="viewcnt">${one.viewcnt}</span>
 						</div>
@@ -467,6 +529,19 @@ i.fa-heart {
 					</div>
 				</div>
 				
+				<div class="modal_deleteback">
+					<div class="modal_deletebox">
+						<div class="modal_deleteheader"><span class="point">M</span>ake <span class="point">F</span>ree</div>
+						<div class="modal_deletebody">
+							정말로 게시판을 삭제하시겠습니까?
+						</div>
+						<div class="re_ox_btn">
+							<div class="drop_btn back_btn">아니오</div>
+							<div class="drop_btn ok_btn">예</div>
+						</div>
+					</div>
+				</div>
+				
 			</div>
 		</div>
 		<div class="comment_wrap">
@@ -481,8 +556,7 @@ i.fa-heart {
 			good_check();
 			
 			$(document).on("click", ".b_write_btn", function(event){
-				oEditors.getById["replyInsert"].
-				exec("UPDATE_CONTENTS_FIELD", []);
+				oEditors.getById["replyInsert"].exec("UPDATE_CONTENTS_FIELD", []);
 				var content = $("#replyInsert").val();
 				
 				if(content == "<p><br></p>"){
@@ -515,9 +589,22 @@ i.fa-heart {
 				$('#b_file').click();
 			});
 			
-			$('.b_back_btn').click(function(){
-				location.href = "<%=referer%>";
+			$('.b_delete_btn').click(function(event) {
+				$('.modal_deleteback').css('display', 'block');
 			});
+			$('.back_btn').click(function(event) {
+				$('.modal_deleteback').css('display', 'none');
+			});
+			
+			$('.ok_btn').click(function(event) {
+				var bno = '${one.bno}';
+				location.href="deleteBoard.makefree?bno="+bno;
+			});
+			
+			
+		<%-- 	$('.b_back_btn').click(function(){
+				location.href = "<%=referer%>";
+			}); --%>
 			
 			$('#btn_good').click(function(){
 				var bno = '${one.bno}';
@@ -547,6 +634,9 @@ i.fa-heart {
 				});
 				
 			});
+		});
+		$(document).on("click", ".b_back_btn", function(event){
+			location.href = "<%=referer%>";
 		});
 		
 		$(document).on("click", ".delete_comment", function(event){

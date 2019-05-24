@@ -85,13 +85,13 @@
 						<div class="write_box">
 							<textarea class="board_textarea" id="replyInsert" name="re_textarea" placeholder="댓글을 입력해주세요."></textarea>
 							<script type="text/javascript">
-							var oEditors = [];
-							nhn.husky.EZCreator.createInIFrame({
-							 oAppRef: oEditors,
-							 elPlaceHolder: "replyInsert",
-							 sSkinURI: "<%=request.getContextPath()%>/smarteditor/SmartEditor2Skin.html",
-							 fCreator: "createSEditor2"
-							});
+								var oEditors = [];
+								nhn.husky.EZCreator.createInIFrame({
+								 oAppRef: oEditors,
+								 elPlaceHolder: "replyInsert",
+								 sSkinURI: "<%=request.getContextPath()%>/smarteditor/SmartEditor2Skin.html",
+								 fCreator: "createSEditor2"
+								});
 							</script>
 						</div>
 			

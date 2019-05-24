@@ -18,6 +18,14 @@ public class BoardDTO {
 		
 	}
 	
+	public BoardDTO(String title, String content, String writer) {
+		super();
+		this.title = title;
+		this.content = content;
+		this.writer = writer;
+	}
+
+
 	public BoardDTO(String bno, String writer) {
 		super();
 		this.bno = bno;

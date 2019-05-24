@@ -221,6 +221,47 @@ public class BoardDAO {
 		return result;
 	}
 	
+	//댓글 등록 또는 삭제시 해당게시글 replycnt +1 or -1
+	public void replyCntUpdate(int bno, String flag) {
+		sqlSession = sqlSessionFactory.openSession(true);
+		
+		try {
+			HashMap<String, String> map = new HashMap<>();
+			map.put("bno", bno+"");
+			map.put("flag", flag);
+			result = sqlSession.update("replyCntUpdate", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
+		}
+		
+	}
 	
+	public void insertBoard(BoardDTO bDto) {
+		sqlSession = sqlSessionFactory.openSession(true);
+		
+		try {
+			
+			result = sqlSession.insert("insertBoard", bDto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
+		}
+		
+	}
+	
+	public void deleteBoard(String bno) {
+		sqlSession = sqlSessionFactory.openSession(true);
+		
+		try {
+			result = sqlSession.delete("deleteBoard", bno);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
+		}
+	}
 	
 }

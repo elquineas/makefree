@@ -137,6 +137,16 @@
 		 WHERE bno = #{bno}
 	</update>
 	
+	<insert id="insertBoard" parameterType="com.makefree.dto.BoardDTO">
+		INSERT INTO tbl_board(bno, title, content, writer)
+		VALUES(seq_board.NEXTVAL, #{title}, #{content}, #{writer})
+	</insert>
+	
+	<delete id="deleteBoard" parameterType="String">
+		DELETE FROM tbl_board
+		WHERE bno=#{bno}
+	</delete>
+	
 	
 	<select id="replyList" parameterType="String" resultType="com.makefree.dto.ReplyDTO">
 		SELECT * FROM tbl_reply
@@ -147,6 +157,34 @@
 		INSERT INTO tbl_reply(rno, content, writer, bno)
 		VALUES(seq_reply.NEXTVAL, #{content}, #{writer}, #{bno})
 	</insert>
+	
+
+	
+<!-- 	<update id="replyCntAdd" parameterType="int">
+		UPDATE tbl_board
+		   SET replycnt = replycnt + 1
+		 WHERE bno = #{bno}
+	</update>
+	
+	<update id="replyCntMinus" parameterType="int">
+		UPDATE tbl_board
+		   SET replycnt = replycnt - 1
+		 WHERE bno = #{bno}
+	</update> 
+	위의 2개를 합쳐서 동적쿼리문으로 바꿈
+-->
+	<update id="replyCntUpdate">
+		UPDATE tbl_board
+			<if test="flag == 'plus'">
+		   SET replycnt = replycnt + 1	
+			</if>
+			<if test="flag == 'minus'">
+		   SET replycnt = replycnt - 1
+			</if>
+		 WHERE bno = #{bno}
+	</update>
+	
+<!-- 좋아요버튼 -->
 	
 	<insert id="goodAdd" parameterType="hashmap" >
 		INSERT INTO tbl_good(gno, id, bno)
@@ -179,16 +217,8 @@
 		WHERE rno = #{rno}
 	</delete>
 	
-	<update id="replyCntAdd" parameterType="int">
-		UPDATE tbl_board
-		   SET replycnt = replycnt + 1
-		 WHERE bno = #{bno}
-	</update>
 	
-	<update id="replyCntMinus" parameterType="int">
-		UPDATE tbl_board
-		   SET replycnt = replycnt - 1
-		 WHERE bno = #{bno}
-	</update>
+	
+
 	
 </mapper>

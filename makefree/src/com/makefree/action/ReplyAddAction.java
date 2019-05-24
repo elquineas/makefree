@@ -32,8 +32,9 @@ public class ReplyAddAction implements Action{
 		
 		if(result > 0) {
 			System.out.println("성공");
-			bDao.replyCntAdd(bno);
-			
+			/* bDao.replyCntAdd(bno); */
+			String flag="plus";
+			bDao.replyCntUpdate(bno, flag);
 			
 		} else {
 			System.out.println("실패");

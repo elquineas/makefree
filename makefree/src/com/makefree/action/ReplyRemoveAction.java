@@ -24,9 +24,10 @@ public class ReplyRemoveAction implements Action{
 		
 		if(result == 1) {
 			System.out.println("성공");
-			result = bDao.replyCntMinus(bno);
-			
-			System.out.println(result);
+			/* bDao.replyCntMinus(bno); */
+			String flag="minus";
+			bDao.replyCntUpdate(bno, flag);
+
 		}
 		
 		return null;

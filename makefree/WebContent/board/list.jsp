@@ -227,7 +227,6 @@
 				location.href="${path}/boardList.makefree?search_option="+search_option+"&keyword="+keyword;
 			});
 			
-			
 /* 			$('#input_search').focus(function(event) {
 				$('.board_search_bar').css('width', '400px')
 									  .css('background-color', 'white')
@@ -245,7 +244,33 @@
 								  .val("");
 			}); */
 
+			$('.board_insert').click(function(event) {
+				
+				$.ajax({
+					type:"POST",
+					url: "registerAjax.makefree",
+					dataType: "json",
+					success:function(data){
+						if(data.message == "login"){
+							location.href = "registerView.makefree";
+						}else if(data.message == "nologin") {
+							
+							$('#modal').css('display', 'flex');
+							$('#inputid').focus();
+							$('.err_code').last().css('display','block')
+												 .css('color', '#ff1616')
+											     .text('로그인이 필요합니다.');
+						}
+						
+					},
+					error: function(){
+						alert("System Error!!!")
+					} 
+				});
 
+			});
+			
+			
 		});
 	</script>
 	<%@ include file="../include/footer.jsp" %>
