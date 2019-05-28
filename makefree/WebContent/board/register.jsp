@@ -166,7 +166,7 @@ body{
 </head>
 <body>
 	<div class="all_wrap">
-		<form action="insertBoard.makefree"  method="POST" name="frm_board" id="frm_board">
+		<form action="insertBoard.makefree"  method="POST" name="frm_board" id="frm_board" encType="multipart/form-data">
 			<div class="board_wrap">
 				<div class="board_insert_box">
 					<div class="board_insert_header">

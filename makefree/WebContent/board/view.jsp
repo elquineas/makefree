@@ -130,6 +130,7 @@ body{
 	height: 32px;
 	line-height:28px;
 	color:#BDBDBD;
+	letter-spacing : -2px;
 }
 
 .d_file_text > i {
@@ -489,8 +490,30 @@ i.fa-heart {
 					<div class="content_wrap">
 						<span class="content_name">첨부파일</span>
 						<input type="file" name="" id="b_file">
-						<div class="d_file_text"><i class="fas fa-file-upload"></i>
-							<span> 첨부된 파일이 없습니다.</span>
+						<div class="d_file_text">
+							<c:choose>
+								<c:when test="${one.filesize > 0}">
+									<i class="fas fa-file-upload" style="color:mediumseagreen;"></i>
+									<span> ${one.filename} </span>
+									<span>
+										<c:choose>
+											<c:when test="${one.filesize/1024/1024 > 1}">
+												(<fmt:formatNumber type="number" pattern="0.00" value="${one.filesize / 1024 / 1024}">
+												</fmt:formatNumber> MB)
+											</c:when>
+											<c:otherwise>
+												(<fmt:formatNumber type="number" pattern="0.00" value="${one.filesize / 1024}">
+												</fmt:formatNumber> KB)
+											</c:otherwise>
+										</c:choose>	
+									</span>
+								</c:when>
+								<c:otherwise>
+									<i class="fas fa-file-upload" color="mediumseagreen"></i>
+									<span> 첨부된 파일이 없습니다. </span>
+								</c:otherwise>
+							</c:choose>
+							
 						</div>
 						<div class="gv_box">
 							<span class="content_num">
@@ -550,6 +573,18 @@ i.fa-heart {
 	</div> 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript">
+		/* 
+		history.pushState(null, null, location.href);
+		window.onpopstate = function(){
+			history.go(1);
+		} 뒤로가기버튼을 사용하지 못하게 막는것 
+		*/
+		history.pushState(null, document.title, location.href);
+		window.addEventListener('popstate', function(event){
+			history.pushState(null, document.title, '<%=referer%>');
+			location.reload();
+		});
+		
 		$(document).ready(function() {
 			/*문서가 준비되면 댓글 목록을 조회하는 AJAX 실행 */
 			comment_list();
@@ -584,14 +619,26 @@ i.fa-heart {
 					});
 				}
 			});
+			var bno = '${one.bno}';
+			
+			
+			
 			
 			$('.d_file_text').click(function(event) {
-				$('#b_file').click();
+				if(${one.filesize > 0}) {
+					$('#b_file').click();
+				}
+				
 			});
 			
 			$('.b_delete_btn').click(function(event) {
 				$('.modal_deleteback').css('display', 'block');
 			});
+			
+			$('.b_update_btn').click(function(event) {
+				location.href = "modify.makefree?bno="+bno;
+			});
+			
 			$('.back_btn').click(function(event) {
 				$('.modal_deleteback').css('display', 'none');
 			});

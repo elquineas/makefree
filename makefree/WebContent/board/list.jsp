@@ -147,7 +147,11 @@
 						</div>
 						<div class="content_box board_content_good"><i class="fas fa-heart"></i> ${bDto.goodcnt}</div>
 						<div class="content_box board_content_view"><i class="far fa-eye"></i> ${bDto.viewcnt}</div>
-						<div class="content_box board_content_file"></div>
+						<div class="content_box board_content_file">
+							<c:if test="${bDto.filesize > 0}">
+								<i class="fas fa-paperclip" style="color:slateblue;"></i>
+							</c:if>
+						</div>
 					</div>
 				</c:forEach>
 			</div>

@@ -180,6 +180,7 @@ public class BoardDAO {
 		}
 		return result;
 	}
+	
 	public int goodCntpm(HashMap<String, String> map) {
 		sqlSession = sqlSessionFactory.openSession(true);
 		
@@ -262,6 +263,39 @@ public class BoardDAO {
 		} finally {
 			sqlSession.close();
 		}
+	}
+
+	public int registerAdd(BoardDTO bDto) {
+		sqlSession = sqlSessionFactory.openSession(true);
+		
+		try {
+			System.out.println("수정 DAO단 실행");
+			result = sqlSession.update("contentRegister", bDto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
+		}
+		
+		return result;
+	}
+	
+	public BoardDTO modify(String bno) {
+		sqlSession = sqlSessionFactory.openSession();
+		
+		try {
+			bDto = sqlSession.selectOne("modify", bno);
+			System.out.println(bDto.toString());
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
+		}
+		
+		return bDto;
+		
 	}
 	
 }

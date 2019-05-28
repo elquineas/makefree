@@ -137,9 +137,10 @@
 		 WHERE bno = #{bno}
 	</update>
 	
+	<!-- insert, update, delete에서 resultType을 생략가능한게 아니라 무조껀 생략해야만 한다. -->
 	<insert id="insertBoard" parameterType="com.makefree.dto.BoardDTO">
-		INSERT INTO tbl_board(bno, title, content, writer)
-		VALUES(seq_board.NEXTVAL, #{title}, #{content}, #{writer})
+		INSERT INTO tbl_board(bno, title, content, writer, filename, filesize)
+		VALUES(seq_board.NEXTVAL, #{title}, #{content}, #{writer}, #{filename}, #{filesize})
 	</insert>
 	
 	<delete id="deleteBoard" parameterType="String">
@@ -217,8 +218,19 @@
 		WHERE rno = #{rno}
 	</delete>
 	
+	<select id="modify" parameterType="String" resultType="com.makefree.dto.BoardDTO">
+		SELECT * FROM tbl_board
+		WHERE bno = #{bno}
+	</select>
 	
-	
+	<update id="contentRegister" parameterType="com.makefree.dto.BoardDTO">
+		UPDATE tbl_board
+		   SET title = #{title},
+		   	   content = #{content},
+		   	   filename = #{filename},
+		   	   filesize = #{filesize}
+		 WHERE bno = #{bno}
+	</update>
 
 	
 </mapper>
