@@ -36,7 +36,7 @@
 	}
 	.body_header > img{
 		margin-top: 50px;
-		height: 100px;
+		height: 70px;
 		width: 250px;
 	}
 	.con_wrap{
@@ -92,7 +92,7 @@
 		font-size: 30px;
 		line-height: 45px;
 		border-radius: 10px;
-		background-color: skyblue;
+		background-color: #FFB400;
 		color: white;
 		font-weight: 600;
 		cursor: pointer;
@@ -292,7 +292,7 @@
 				<i class="fas fa-arrow-left" id="back_icon"></i>
 			</div>
 			<div class="body_header">
-				<img src="${path}/images/logo2-2.png">
+				<img src="${path}/images/logo2-12.png">
 			</div>
 			<div class="con_wrap">
 				<div class="all_ckbox">

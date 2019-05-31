@@ -214,8 +214,8 @@ body{
 						<div class="content_wrap">
 							<span class="content_name">첨부파일</span>
 							<input type="file" name="b_file" id="b_file">
-							<input type="hidden" name="basic_file_name" value="${one.filename}">
-							<input type="hidden" name="basic_file_size" value="${one.filesize}">
+							<input type="hidden" name="basic_file_name" id="basic_file_name" value="${one.filename}">
+							<input type="hidden" name="basic_file_size" id="basic_file_size" value="${one.filesize}">
 							<input type="hidden" name="basic_check" id="basic_check" value="">
 							<div class="d_file_text">		
 								<div class="d_file_text1">

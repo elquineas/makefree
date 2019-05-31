@@ -3,23 +3,47 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.makefree.mybatis.MakefreeMapper.xml">
-	<select id="bestList" resultType="com.makefree.dto.ProductDTO">
+	<select id="chickenList" resultType="com.makefree.dto.ProductDTO">
 	<![CDATA[
 		SELECT * 
-		FROM(SELECT * FROM tbl_product
-		     ORDER BY p_good DESC)
-		WHERE rownum <= 4
+		FROM(SELECT * FROM tbl_product 
+		    WHERE p_type = '닭고기'
+		    ORDER BY p_indate DESC)
+		WHERE rownum <= 5
 		]]>
 	</select>
 	
-	<select id="newList" resultType="com.makefree.dto.ProductDTO">
+	<select id="pigList" resultType="com.makefree.dto.ProductDTO">
 	<![CDATA[
 		SELECT * 
 		FROM(SELECT * FROM tbl_product
+			 WHERE p_type = '돼지고기'
 		     ORDER BY p_indate DESC)
-		WHERE rownum <= 4
+		WHERE rownum <= 5
 		]]>
 	</select>
+	
+	<select id="cowList" resultType="com.makefree.dto.ProductDTO">
+	<![CDATA[
+		SELECT * 
+		FROM(SELECT * FROM tbl_product
+			 WHERE p_type = '소고기'
+		     ORDER BY p_indate DESC)
+		WHERE rownum <= 5
+		]]>
+	</select>
+	
+	<select id="menu_search" parameterType="String" resultType="com.makefree.dto.ProductDTO">
+		SELECT * FROM tbl_product
+		WHERE p_code = #{p_code}
+	</select>
+	
+	<select id="detail_search" parameterType="String" resultType="com.makefree.dto.ProductDTO">
+		SELECT * FROM tbl_recipe
+		WHERE p_code = #{p_code}
+	</select>
+	
+	
 	
 	<select id="idCheck" parameterType="String" resultType="String">
 		SELECT id FROM tbl_member

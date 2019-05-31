@@ -11,6 +11,9 @@ public class ProductDTO {
 	 private String p_cnt;
 	 private int p_good;
 	 private Date p_indate;
+	 private String rnum;
+	 private String r_content;
+	 private String r_img;
 	 
 	 
 	 public ProductDTO(){
@@ -78,11 +81,38 @@ public class ProductDTO {
 		this.p_indate = p_indate;
 	}
 
+	public String getRnum() {
+		return rnum;
+	}
+
+	public void setRnum(String rnum) {
+		this.rnum = rnum;
+	}
+
+	public String getR_content() {
+		return r_content;
+	}
+
+	public void setR_content(String r_content) {
+		this.r_content = r_content;
+	}
+
+	public String getR_img() {
+		return r_img;
+	}
+
+	public void setR_img(String r_img) {
+		this.r_img = r_img;
+	}
+
+	
+	
 	@Override
 	public String toString() {
 		return "ProductDTO [p_code=" + p_code + ", p_name=" + p_name + ", p_type=" + p_type + ", p_price=" + p_price
-				+ ", p_img=" + p_img + ", p_cnt=" + p_cnt + ", p_good=" + p_good + ", p_indate=" + p_indate + "]";
-	} 
-	
+				+ ", p_img=" + p_img + ", p_cnt=" + p_cnt + ", p_good=" + p_good + ", p_indate=" + p_indate + ", rnum="
+				+ rnum + ", r_content=" + r_content + ", r_img=" + r_img + "]";
+	}
+
 	
 }

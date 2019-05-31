@@ -49,23 +49,25 @@ public class UpdateBoardAction implements Action{
 		int filesize = 0;
 		
 		BoardDTO bDto= new BoardDTO(title, content, writer); 
-		
+		System.out.println("bFileSize: "+bFileSize+", bFileName: "+bFileName+", bCheck: "+bCheck);
 		// 파일업로드 3) DB에 저장할 첨부파일의 이름과 사이즈를 구함
 		// 새로등록한 첨부파일이 있다면
 		// : 새로등록한 첨부파일의 filename과 filesize를 구하고
 		// 새로등록한 첨부파일이 없다면
 		// : while()을 타지않아 filename = "", filesize = 0으로 고정
+		
 		try {
 			Enumeration files = multi.getFileNames();
+			//cos.jar 라이브러리에서 추가된 코드
+			//input 타입에 있는 파일이름을 가져옴
 			
-			while(files.hasMoreElements()) {
+			while(files.hasMoreElements()) { // 가져온 이름의 rs.next처럼 줄을 가르킴
 				String file1 = (String)files.nextElement();
-				filename = multi.getFilesystemName(file1); //첨부파일의
-				File f1 = multi.getFile(file1); //첨부파일의
+				filename = multi.getFilesystemName(file1);
+				File f1 = multi.getFile(file1); 
+				//list처럼 한줄씩 꺼내온 파일을 각각 변수에 담아주는 것
 				
-				if(f1 != null) {
-					//filesize는 long 타입으로 가져옴
-					//int로 형변환
+				if(f1 != null) { //f1에 파일이 있으면
 					filesize = (int)f1.length();
 				}
 			}
@@ -73,6 +75,8 @@ public class UpdateBoardAction implements Action{
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
+		System.out.println("filesize = " + filesize + ", filename = " + filename);
+		// jsp 페이지에 있는 <input type="file"...>에 저장 된 파일 이름과 사이즈를 알아내기위한 코드 (try ~ catch)
 		
 		if(filename == null || filename.trim().equals("")) {
 			filename ="-";
@@ -89,9 +93,6 @@ public class UpdateBoardAction implements Action{
 			if(bFileSize > 0){ //기존파일 있음
 				File file = new File(Constants.UPLOAD_PATH + bFileName);
 				file.delete();
-			} else {
-				filename = bFileName;
-				filesize = bFileSize;
 			}
 		}
 		

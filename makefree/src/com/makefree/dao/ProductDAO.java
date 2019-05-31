@@ -20,6 +20,7 @@ public class ProductDAO {
 		// : 객체생성은 1회만 동작하고 생성된 객체를 빌려쓰는 형태
 		// : +외부에서는 객체생성이 불가능하게 잠금!
 		private ProductDAO() {}
+		ProductDTO pDto = null;
 		
 		// 외부에서 빌려서 사용할 객체 생성(instance)
 		private static ProductDAO instance = new ProductDAO();
@@ -30,12 +31,12 @@ public class ProductDAO {
 		int result = 0;
 		
 		
-		public List<ProductDTO> bestList(){
+		public List<ProductDTO> chickenList(){
 			List<ProductDTO> list = null;
 			sqlSession = sqlSessionFactory.openSession();
 			
 			try {
-				list = sqlSession.selectList("bestList");
+				list = sqlSession.selectList("chickenList");
 				
 				for (ProductDTO productDTO : list) {
 					
@@ -48,12 +49,12 @@ public class ProductDAO {
 			return list;
 		}
 		
-		public List<ProductDTO> newList(){
+		public List<ProductDTO> pigList(){
 			List<ProductDTO> list = null;
 			sqlSession = sqlSessionFactory.openSession();
 			
 			try {
-				list = sqlSession.selectList("newList");
+				list = sqlSession.selectList("pigList");
 				
 				for (ProductDTO productDTO : list) {
 					
@@ -65,4 +66,60 @@ public class ProductDAO {
 			}
 			return list;
 		}
+		
+		public List<ProductDTO> cowList(){
+			List<ProductDTO> list = null;
+			sqlSession = sqlSessionFactory.openSession();
+			
+			try {
+				list = sqlSession.selectList("cowList");
+				
+				for (ProductDTO productDTO : list) {
+					
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				sqlSession.close(); 
+			}
+			return list;
+		}
+		
+		public List<ProductDTO> recipeList(String p_code){
+			List<ProductDTO> list = null;
+			sqlSession = sqlSessionFactory.openSession();
+			
+			try {
+				list = sqlSession.selectList("detail_search", p_code);
+				
+				for (ProductDTO productDTO : list) {
+					
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				sqlSession.close(); 
+			}
+			return list;
+		}
+		
+		
+		public ProductDTO detail(String p_code) {
+			sqlSession = sqlSessionFactory.openSession();
+			try {
+				
+				pDto = sqlSession.selectOne("menu_search", p_code);
+				System.out.println("DAO에서 pDto : "+ pDto.toString());
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				sqlSession.close(); 
+			}
+			return pDto;
+
+		}
+		
+		
+		
 }

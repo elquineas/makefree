@@ -16,6 +16,9 @@ import com.makefree.action.BoardViewAction;
 import com.makefree.action.CommentListAction;
 import com.makefree.action.ConstractAction;
 import com.makefree.action.DeleteBoardAction;
+import com.makefree.action.DetailAction;
+import com.makefree.action.DetailMenuAction;
+import com.makefree.action.DownloadAction;
 import com.makefree.action.DropMemberAction;
 import com.makefree.action.DropMemberPlayAction;
 import com.makefree.action.GoodAddAction;
@@ -62,6 +65,12 @@ public class FrontController extends HttpServlet {
 		
 		if(command.contentEquals("/index.makefree")) {
 			action = new IndexAction();
+			forward = action.excute(request, response);
+		} else if(command.contentEquals("/detailmenu.makefree")) {
+			action = new DetailMenuAction();
+			forward = action.excute(request, response);
+		} else if(command.contentEquals("/detail.makefree")) {
+			action = new DetailAction();
 			forward = action.excute(request, response);
 		} else if(command.contentEquals("/constract.makefree")) {
 			action = new ConstractAction();
@@ -144,7 +153,12 @@ public class FrontController extends HttpServlet {
 		} else if(command.contentEquals("/updateBoard.makefree")) {
 			action = new UpdateBoardAction();
 			forward = action.excute(request, response);
+		} else if(command.contentEquals("/download.makefree")) {
+			action = new DownloadAction();
+			forward = action.excute(request, response);
 		} 
+		
+		
 		
 		
 		

@@ -493,8 +493,8 @@ i.fa-heart {
 						<div class="d_file_text">
 							<c:choose>
 								<c:when test="${one.filesize > 0}">
-									<i class="fas fa-file-upload" style="color:mediumseagreen;"></i>
-									<span> ${one.filename} </span>
+									<i class="fas fa-file-upload" style="color:mediumseagreen; cursor:pointer;"></i>
+									<span style="cursor:pointer;"> ${one.filename} </span>
 									<span>
 										<c:choose>
 											<c:when test="${one.filesize/1024/1024 > 1}">
@@ -509,7 +509,7 @@ i.fa-heart {
 									</span>
 								</c:when>
 								<c:otherwise>
-									<i class="fas fa-file-upload" color="mediumseagreen"></i>
+									<i class="fas fa-file-upload" color="mediumseagreen;"></i>
 									<span> 첨부된 파일이 없습니다. </span>
 								</c:otherwise>
 							</c:choose>
@@ -626,7 +626,7 @@ i.fa-heart {
 			
 			$('.d_file_text').click(function(event) {
 				if(${one.filesize > 0}) {
-					$('#b_file').click();
+					location.href="download.makefree?filename=${one.filename}";
 				}
 				
 			});

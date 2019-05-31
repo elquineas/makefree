@@ -154,6 +154,13 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
+		$('#home_btn').click(function(event) {
+			location.href="index.makefree";
+		});
+		$('#new_btn').click(function(event) {
+			location.href="detailmenu.makefree";
+		});
+		
 		
 		$(window).scroll(function(event) {
 			var scrollValue = $(this).scrollTop();
