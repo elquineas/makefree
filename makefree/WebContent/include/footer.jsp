@@ -200,7 +200,7 @@
 					<a href="#"><strong>개인정보처리방침</strong></a> | 
 					<a href="#">광고문의</a> | 
 					<a href="#">고객센터</a>
-				</div>
+				</div> 
 				<div class="footer_boxwrap">
 					<div class="footer_textbox">
 						<div class="footer_text">
